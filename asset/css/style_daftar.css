@@ -1,0 +1,130 @@
+@font-face{font-family: "Quicksand"; src: url(Quicksand.ttf);}
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand' ;
+}
+
+body{
+    background-color: #00aec9;
+}
+
+.boxform {
+    width: 50%;
+    margin: 100px auto;
+    border: solid #fff;
+}
+.boxform2 {
+    width: 70%;
+    align-content: center;
+    margin: 100px auto;
+    border: solid #fff;
+}
+
+.image_bukti{
+    margin-left: 10%;
+
+}
+.box {
+    background-color: #ffff;
+    padding: 10px;
+    box-sizing: border-box;
+    
+}
+
+.table{
+    width: 100%;
+}
+
+.table tr td:nth-child(1){
+    width: 30%;
+}
+
+.inputstyle {
+    padding: 5px 10px;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.btn1{
+    padding: 10px 17px;
+    background-color: #4a99d7;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    margin-top: 50px;
+    width: 50%;
+}
+
+.btn1:hover {
+    cursor: pointer;
+    background-color: #4881AE;
+}
+
+.judul {
+    background-color: #ddd; 
+    margin-top: 0; 
+    margin-bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.judulh2{
+    border-bottom: solid #fff;
+    text-align: center;
+    padding: 3%;
+}
+
+p, .subjudul{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+p{
+    padding-bottom: 5%;
+}
+.background_tampilan_utama{
+    width: 100%;
+    height: 100%;
+    background-color: #00aec9;
+}
+
+/*tab*/
+/*desain tab*/
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+  /* tab button */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+  }
+  /* ganti warrna ketika di tekan */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  /* tabel aktif */
+  .tab button.active {
+    background-color: #ccc;
+  }
+  
+  /*tab content */
+  .tabcontent {
+    display: none;
+    width: auto;  
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+  .desain_table{
+    width: 50%;
+    border: solid #111111;
+    color: #000000;
+  }

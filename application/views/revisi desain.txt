@@ -1,0 +1,92 @@
+*data_siswa
+-sisoe
+
+*data_ortu
+-nama_orangtua
+-alamat_orangtua
+-no_kk
+-pendapatan
+-no_hp_ortu
+
+*data_sekolah
+-asal_sekolah
+-alamat_asal_sekolah
+-NISN
+
+table
+<table border="1" align="CENTER" class="desain_table">
+                    <tr align="CENTER">
+                        <th>ID FORMULIR</th>
+                        <th>NAMA LENGKAP</th>
+                        <th>GENDER</th>
+                        <th>KOTA KELAHIRAN</th>
+                        <th>TANGGAL LAHIR</th>
+                        <th>AGAMA</th>
+                        <th>ANAK KE</th>
+                        <th>SAUDARA</th>
+                        <th>ALAMAT</th>
+                        <th>RT</th>
+                        <th>RW</th>
+                        <th>KELURAHAN</th>
+                        <th>KECAMATAN</th>
+                        <th>KOTA/KABUPATEN</th>
+                        <th>PROVINSI</th>
+                        <th>KODE POS</th>
+                        <th>NO HP/WA</th>
+                        <th>NISN</th>
+                        <th>ASAL SEKOLAH</th>
+                        <th>ALAMAT SEKOLAH</th>
+                        <th>FOTO</th>
+                        <th>NAMA WALI</th>
+                        <th>ALAMAT WALI</th>
+                        <th>NOMER KK</th>
+                        <th>PENDAPATAN</th>
+                        <th>NO HP/WA</th>
+                        <th>PILIHAN</th>
+                    </tr>
+                    <?php
+                    $view_bukti = $formulir->result_array();
+                    foreach ($view_bukti as $view_table) {
+                    ?>
+                        <tr align="CENTER">
+                            <td><?= $view_table['no_daftar'] ?></td>
+                            <td><?= $view_table['nama_lengkap'] ?></td>
+                            <td><?= $view_table['gender'] ?></td>
+                            <td><?= $view_table['kota_kelahiran'] ?></td>
+                            <td><?= $view_table['tgl_lahir'] ?></td>
+                            <td><?= $view_table['agama'] ?></td>
+                            <td><?= $view_table['anak_ke'] ?></td>
+                            <td><?= $view_table['saudara'] ?></td>
+                            <td><?= $view_table['alamat'] ?></td>
+                            <td><?= $view_table['RT'] ?></td>
+                            <td><?= $view_table['RW'] ?></td>
+                            <td><?= $view_table['kelurahan'] ?></td>
+                            <td><?= $view_table['kecamatan'] ?></td>
+                            <td><?= $view_table['kota_kab'] ?></td>
+                            <td><?= $view_table['provinsi'] ?></td>
+                            <td><?= $view_table['kode_pos'] ?></td>
+                            <td><?= $view_table['no_hp'] ?></td>
+                            <td><?= $view_table['nisn'] ?></td>
+                            <td><?= $view_table['asal_sekolah'] ?></td>
+                            <td><?= $view_table['alamat_asal_sekolah'] ?></td>
+                            <td><img src="<?= base_url() . 'asset/images/' . $view_table['foto'] ?>" width="100" height="100"></td>
+                            <td><?= $view_table['nama_orangtua'] ?></td>
+                            <td><?= $view_table['alamat_orangtua'] ?></td>
+                            <td><?= $view_table['no_kk'] ?></td>
+                            <td><?= $view_table['pendapatan'] ?></td>
+                            <td><?= $view_table['no_hp_ortu'] ?></td>
+                            <td>
+                                <dl>
+                                    <dt style="margin: 10px;">
+                                        <a href="<?php echo base_url('') . $view_table['no_daftar'] ?>" class="desain_tombol">PROSES</a>
+                                    </dt>
+                                    <dt>
+                                        <a href="<?php echo base_url('') . $view_table['no_daftar'] ?>" class="desain_tombol">LIHAT</a>
+                                    </dt>
+                                </dl>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </table>
