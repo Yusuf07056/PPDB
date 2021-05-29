@@ -149,6 +149,7 @@ class Adm_ctrl extends CI_Controller
         $data['registrasi'] = $this->model_adm->get_registrasi();
         $email = $this->session->userdata('email');
         $role = $this->session->userdata('role_id');
+        $data['registrasi'] = $this->model_adm->data_admin($email);
         $data['bukti_pembayaran'] = $this->model_adm->get_bukti();
         $data['validasi_bukti'] = $this->model_adm->get_val_bukti();
         $data['formulir'] = $this->model_adm->get_formulir();
@@ -212,6 +213,8 @@ class Adm_ctrl extends CI_Controller
     {
         $data['registrasi'] = $this->db->get_where('registrasi', ['email' => $this->session->userdata('email')])->row_array();
         $data['registrasi'] = $this->model_adm->get_registrasi();
+        $id = $this->session->userdata('id_regis');
+        $data['registrasi'] = $this->model_adm->data_admin($id);
         $email = $this->session->userdata('email');
         $role = $this->session->userdata('role_id');
         $data['bukti_pembayaran'] = $this->model_adm->get_bukti();
@@ -221,7 +224,7 @@ class Adm_ctrl extends CI_Controller
         } elseif ($role != 1) {
             redirect(base_url('index.php/User'));
         } else {
-            $this->load->view('Profil_Admin');
+            $this->load->view('Profil_Admin', $data);
         }
     }
     public function lihat($id_bukti)
@@ -257,6 +260,32 @@ class Adm_ctrl extends CI_Controller
         } else {
             $this->load->view('validasi_bukti', $data);
         }
+    }
+    public function edit_validasi_bukti($id_bukti)
+    {
+        $data['registrasi'] = $this->db->get_where('registrasi', ['email' => $this->session->userdata('email')])->row_array();
+        $data['registrasi'] = $this->model_adm->get_registrasi();
+        $email = $this->session->userdata('email');
+        $role = $this->session->userdata('role_id');
+        $data['bukti_pembayaran'] = $this->model_adm->get_buktiselect($id_bukti);
+        if (empty($email)) {
+            $this->session->sess_destroy();
+            redirect(base_url('index.php/Adm_ctrl'));
+        } elseif ($role != 1) {
+            redirect(base_url('index.php/User'));
+        } else {
+            $this->load->view('edit_valbuk', $data);
+        }
+    }
+    public function edit_bukti_pembayaran()
+    {
+        $id_bukti = $this->input->post('id_bukti');
+        $stts = $this->input->post('status');
+        $data = array(
+            'stts' => $stts
+        );
+        $this->model_adm->update_bukti($data, $id_bukti);
+        redirect(base_url('index.php/Adm_ctrl/PPDB'));
     }
     public function lihat_detail($no_daftar)
     {

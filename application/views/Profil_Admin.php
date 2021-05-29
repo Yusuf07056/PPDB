@@ -35,7 +35,7 @@
             <table align="CENTER" class="desain_table">
                 <tr>
                     <td>NAMA</td>
-                    <td><input type="text" disabled></td>
+                    <td><input type="text" value="" disabled></td>
                 </tr>
                 <tr>
                     <td>KONTAK</td>

@@ -153,4 +153,14 @@ class model_adm extends CI_Model
         $query = $this->db->get_where('formulir', ['nama_lengkap' => $search]);
         return $query;
     }
+    public function data_admin($cari)
+    {
+        $query = $this->db->get_where('registrasi', ['email' => $cari]);
+        return $query;
+    }
+    public function update_bukti($data, $id_bukti)
+    {
+        $this->db->where('id_bukti', $id_bukti);
+        $this->db->update('validasi_bukti', $data);
+    }
 }

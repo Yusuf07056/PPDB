@@ -37,10 +37,22 @@
         </div>
         <div id="mySidenav" class="sidenav">
             <button class="closebtn" onclick="closeNav()">&times;</button>
-            <a href="<?= base_url('index.php/Adm_ctrl/profil') ?>">PROFIL ADMIN</a>
+            <a href="<?= base_url('index.php/Adm_ctrl/profil') ?>">
+                <i class='fas fa-user-tie' style='font-size:36px; color: white;'></i>
+                <?php
+                $view_bukti = $registrasi->result_array();
+                foreach ($view_bukti as $view_table) {
+                ?>
+                    <?= $view_table['nama'] ?>
+                <?php
+                }
+                ?>
+            </a>
             <a href="<?= base_url('index.php/Adm_ctrl/PPDB') ?>">PENDAFTAR</a>
             <a href="<?= base_url('index.php/Adm_ctrl/settanggal') ?>">SET TANGGAL</a>
-            <a href="<?= base_url('index.php/Adm_ctrl/logout') ?>"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>
+            <a href="<?= base_url('index.php/Adm_ctrl/logout') ?>">
+                <i class="fas fa-sign-out-alt"></i>LOGOUT
+            </a>
         </div>
 
         <div class="">
@@ -70,10 +82,14 @@
                                 <td>
                                     <dl>
                                         <dt style="margin: 10px;">
-                                            <a href="<?php echo base_url('index.php/Adm_ctrl/validasi_bukti/') . $view_table['id_bukti'] ?>" class="desain_tombol">PROSES</a>
+                                            <button class="desain_tombol">
+                                                <a href="<?php echo base_url('index.php/Adm_ctrl/validasi_bukti/') . $view_table['id_bukti'] ?>"> <i class="fas fa-check-square" style="font-size:18px; color: white;"></i> PROSES</a>
+                                            </button>
                                         </dt>
                                         <dt>
-                                            <a href="<?php echo base_url('index.php/Adm_ctrl/lihat/') . $view_table['id_bukti'] ?>" class="desain_tombol">LIHAT</a>
+                                            <button class="desain_tombol">
+                                                <a href="<?php echo base_url('index.php/Adm_ctrl/lihat/') . $view_table['id_bukti'] ?>"> <i class='far fa-eye' style='font-size:18px; color: white;'></i>LIHAT</a>
+                                            </button>
                                         </dt>
                                     </dl>
 
@@ -119,8 +135,7 @@
                             <tr align="CENTER">
                                 <td><?= $view_table['id_valbuk'] ?></td>
                                 <td>
-                                    <!--<img src="<?= base_url() . 'asset/images/' . $view_table['bukti_transfer'] ?>" width="100" height="100">-->
-
+                                    <a style="color: black;" href="<?php echo base_url('index.php/Adm_ctrl/edit_validasi_bukti/') . $view_table['id_bukti'] ?>"><?= $view_table['id_bukti'] ?></a>
                                 </td>
                                 <td><?= $view_table['stts'] ?></td>
                                 <td>
@@ -205,14 +220,12 @@
                 </div> -->
             </div>
         </div>
-
-
         <script language="javascript" src=" <?= base_url('asset/js/design.js') ?>"></script>
         <!-- <script language="javascript" src=" <?= base_url('asset/js/design_2.js') ?>"></script> -->
         <script>
             document.getElementById("Utama").click();
         </script>
 </body>
-</body>
+
 
 </html>
