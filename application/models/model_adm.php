@@ -117,11 +117,13 @@ class model_adm extends CI_Model
         $query = $this->db->get('formulir');
         return $query;
     }
-    function input_data_validasi($id_bukti, $stts)
+    function input_data_validasi($id_bukti, $stts, $link)
     {
+        $encrypted_string = $this->encryption->encrypt($link);
         $data = array(
             'id_bukti' => $id_bukti,
-            'stts' => $stts
+            'stts' => $stts,
+            'link' => $encrypted_string
         );
         $this->db->insert('validasi_bukti', $data);
     }

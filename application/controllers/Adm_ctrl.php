@@ -5,7 +5,6 @@ class Adm_ctrl extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->library('form_validation');
         $this->load->model('model_adm');
     }
 
@@ -20,6 +19,7 @@ class Adm_ctrl extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->load->view('LOGIN');
         } else {
+
             $this->login();
         }
     }
@@ -317,7 +317,8 @@ class Adm_ctrl extends CI_Controller
         } else {
             $id_bukti = $this->input->post('id_bukti');
             $stts  = $this->input->post('status');
-            $this->model_adm->input_data_validasi($id_bukti, $stts);
+            $link = $this->input->post('link');
+            $this->model_adm->input_data_validasi($id_bukti, $stts, $link);
             redirect(base_url('index.php/Adm_ctrl/PPDB'));
         }
     }

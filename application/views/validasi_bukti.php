@@ -73,6 +73,14 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            <p>LINK</p>
+                        </td>
+                        <td>
+                            <input type="text" value="<?= $view_table['id_bukti'] ?>" name="Link" id="myBtn">
+                        </td>
+                    </tr>
+                    <tr>
 
                         <td>
                             <button type="submit" class="desain_tombol">INPUT</button>

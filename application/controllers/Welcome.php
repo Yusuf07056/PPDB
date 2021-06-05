@@ -6,9 +6,6 @@ class Welcome extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('form_validation');
-		$this->load->library('session');
-
 		$this->load->model('model_PPDB');
 		$this->load->helper(array('form', 'url'));
 	}
@@ -187,7 +184,7 @@ class Welcome extends CI_Controller
 	}
 	public function laman_login()
 	{
-		$this->form_validation->set_rules('namalengkap', 'Namalengkap', 'required|trim');
+		$this->form_validation->set_rules('mobile', 'Mobile Number ', 'required|regex_match[/^[0-4]{12}$/]'); //12 digit
 		if ($this->form_validation->run() == false) {
 			$this->load->view('login_pendaftaran');
 		} else {
