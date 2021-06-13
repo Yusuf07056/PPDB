@@ -242,6 +242,7 @@
                             <td></td>
                             <td>
                                 <input type="submit" name="submit" value="KIRIM" class="btn1">
+                                <a class="btn1" href="<?= base_url('index.php/Welcome/end_formulir') ?>">BACK</a>
                             </td>
                         </tr>
                     </table>

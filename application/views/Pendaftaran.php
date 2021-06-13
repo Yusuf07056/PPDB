@@ -49,7 +49,8 @@
                 ?>
             </a>
             <a href="<?= base_url('index.php/Adm_ctrl/PPDB') ?>">PENDAFTAR</a>
-            <a href="<?= base_url('index.php/Adm_ctrl/settanggal') ?>">SET TANGGAL</a>
+            <a href="<?= base_url('index.php/Adm_ctrl/settanggal') ?>">KUOTA</a>
+            <a href="<?= base_url('index.php/Adm_ctrl/register') ?>">TAMBAH ADMIN</a>
             <a href="<?= base_url('index.php/Adm_ctrl/logout') ?>">
                 <i class="fas fa-sign-out-alt"></i>LOGOUT
             </a>
@@ -61,7 +62,7 @@
             <!-- Tab content -->
             <div id="London" class="tabcontent">
                 <div>
-                    <table border="1" align="CENTER" class="desain_table">
+                    <table align="CENTER">
                         <tr align="CENTER">
                             <th>ID BUKTI</th>
                             <th>GAMBAR</th>
@@ -81,7 +82,7 @@
                                 <td><?= $view_table['no_wa'] ?></td>
                                 <td>
                                     <dl>
-                                        <dt style="margin: 10px;">
+                                        <dt>
                                             <button class="desain_tombol">
                                                 <a href="<?php echo base_url('index.php/Adm_ctrl/validasi_bukti/') . $view_table['id_bukti'] ?>"> <i class="fas fa-check-square" style="font-size:18px; color: white;"></i> PROSES</a>
                                             </button>
@@ -106,19 +107,19 @@
             <div id="Paris" class="tabcontent">
                 <table align="CENTER">
                     <tr>
-                        <td>SORTING</td>
+                        <td>FILTER</td>
                         <td>
                             <form action="<?= base_url('index.php/Adm_ctrl/PPDB_sort_cari/') ?>" method="post">
                                 <select name="status" id="status" class="desain_CB">
                                     <option value="TERIMA">TERIMA</option>
-                                    <option value="REVISI">REVISI</option>
+                                    <option value="TOLAK">TOLAK</option>
                                 </select>
                                 <button type="submit" class="desain_tombol">SORT</button>
                             </form>
                         </td>
                     </tr>
                 </table>
-                <table border="1" align="CENTER" class="desain_table">
+                <table align="CENTER">
                     <thead>
                         <tr align="CENTER">
                             <th>ID validasi</th>
@@ -142,7 +143,7 @@
                                 <td><?= "localhost/"; ?><?= $view_table['link'] ?></td>
                                 <td>
                                     <dl>
-                                        <dt style="margin: 10px;">
+                                        <dt>
                                             <a href="<?php echo base_url('index.php/Adm_ctrl/validasi_bukti/') . $view_table['id_bukti'] ?>" class="desain_tombol">PROSES</a>
                                         </dt>
                                         <dt>
@@ -170,7 +171,7 @@
                         </td>
                     </tr>
                 </table>
-                <table border="1" align="CENTER" class="desain_table">
+                <table align="CENTER">
                     <tr align="CENTER">
                         <th>ID FORMULIR</th>
                         <th>NAMA LENGKAP</th>
@@ -194,7 +195,7 @@
                             <td><?= $view_table['nama_orangtua'] ?></td>
                             <td>
                                 <dl>
-                                    <dt style="margin: 10px;">
+                                    <dt>
                                         <a href="<?php echo base_url('index.php/Adm_ctrl/lihat_detail/') . $view_table['no_daftar'] ?>" class="desain_tombol">DETAIL</a>
                                     </dt>
                                     <dt>

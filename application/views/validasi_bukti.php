@@ -68,7 +68,7 @@
                         <td>
                             <select name="status" id="status" class="desain_CB">
                                 <option value="TERIMA">TERIMA</option>
-                                <option value="REVISI">REVISI</option>
+                                <option value="TOLAK">TOLAK</option>
                             </select>
                         </td>
                     </tr>

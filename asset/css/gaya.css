@@ -448,3 +448,16 @@ input{
   background-color: #00aec9;
   color: white;
 }
+table {
+  border-collapse: collapse;
+  background-color: white;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color:#d4d3d3;}

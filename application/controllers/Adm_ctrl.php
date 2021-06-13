@@ -72,6 +72,10 @@ class Adm_ctrl extends CI_Controller
 
     public function register()
     {
+        $data['registrasi'] = $this->db->get_where('registrasi', ['email' => $this->session->userdata('email')])->row_array();
+        $data['registrasi'] = $this->model_adm->get_registrasi();
+        $email = $this->session->userdata('email');
+        $role = $this->session->userdata('role_id');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[registrasi.email]', [
             'is_unique' => 'WES ENEK!'
@@ -86,23 +90,30 @@ class Adm_ctrl extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->load->view('register');
         } else {
-            $data = [
+            if (empty($email)) {
+                $this->session->sess_destroy();
+                redirect(base_url('index.php/Adm_ctrl'));
+            } elseif ($role != 1) {
+                redirect(base_url('index.php/User'));
+            } else {
+                $data = [
 
-                'nama' => htmlspecialchars($this->input->post('nama', true)),
-                'password' => password_hash($this->input->post('Password1'), PASSWORD_DEFAULT),
-                'date' => date(DATE_RFC822, time()),
-                'email' => htmlspecialchars($this->input->post('email', true)),
-                'role_id' => 1,
-                'is_active' => 1
-            ];
-            $this->db->insert('registrasi', $data);
-            $this->session->set_flashdata(
-                'message',
-                '<div class="alert alert-success" role="alert">
+                    'nama' => htmlspecialchars($this->input->post('nama', true)),
+                    'password' => password_hash($this->input->post('Password1'), PASSWORD_DEFAULT),
+                    'date' => date(DATE_RFC822, time()),
+                    'email' => htmlspecialchars($this->input->post('email', true)),
+                    'role_id' => 1,
+                    'is_active' => 1
+                ];
+                $this->db->insert('registrasi', $data);
+                $this->session->set_flashdata(
+                    'message',
+                    '<div class="alert alert-success" role="alert">
                     anda sudah terdaftar!
                 </div>'
-            );
-            redirect(base_url('index.php/Adm_ctrl'));
+                );
+                redirect(base_url('index.php/Adm_ctrl/adminnya'));
+            }
         }
     }
 

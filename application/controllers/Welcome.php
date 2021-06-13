@@ -70,23 +70,30 @@ class Welcome extends CI_Controller
 	{
 		$this->load->view('laman_confirm');
 	}
-
+	#auto increment
 	public function formulir()
 	{
-		$dariDB = $this->model_PPDB->cek_no_daftar();
-		$nourut = $dariDB;
-		$no_daftarSekarang = $nourut + 1;
-		$data = array('no_daftar' => $no_daftarSekarang);
-		$this->load->view('formulir', $data);
+		$data['bukti_pembayaran'] = $this->db->get_where('bukti_pembayaran', ['no_wa' => $this->session->userdata('no_wa')])->row_array();
+
+		$no_wa = $this->session->userdata('no_wa');
+
+		if (empty($no_wa)) {
+			$this->session->sess_destroy();
+			redirect(base_url('index.php/Welcome/phone_verification'));
+		} else {
+			$dariDB = $this->model_PPDB->cek_no_daftar();
+			$nourut = $dariDB;
+			$no_daftarSekarang = $nourut + 1;
+			$data = array('no_daftar' => $no_daftarSekarang);
+			$this->load->view('formulir', $data);
+		}
 	}
 
-	public function data_ortu()
-	{
-		$this->load->view('datawali');
-	}
 
 	public function input_form()
 	{
+
+
 		$this->form_validation->set_rules('id_formulir', 'nomer daftar', 'required');
 		$this->form_validation->set_rules('namalengkap', 'Nama lengkap', 'required');
 		$this->form_validation->set_rules('jk', 'Gender', 'required');
@@ -182,60 +189,58 @@ class Welcome extends CI_Controller
 			redirect(base_url('index.php/Welcome/konfirmasi'));
 		}
 	}
-	public function laman_login()
+	public function phone_verification()
 	{
-		$this->form_validation->set_rules('mobile', 'Mobile Number ', 'required|regex_match[/^[0-4]{12}$/]'); //12 digit
+		$this->form_validation->set_rules('no_wa', 'no_wa', 'required|trim', [
+			'required' => 'PHONE NUMBER REQUIRED'
+		]);
 		if ($this->form_validation->run() == false) {
-			$this->load->view('login_pendaftaran');
+			$this->load->view('phone_verification');
 		} else {
-			$this->data_ortu();
+			$this->phone_verification_function();
 		}
 	}
-	function login()
+	function phone_verification_function()
 	{
-		$namalengkap = $this->input->post('namalengkap');
-		$formulir = $this->db->get_where('formulir', ['nama_lengkap' => $namalengkap])->row_array();
-		if ($formulir) {
-			if ($namalengkap == $formulir['nama_lengkap']) {
-				$data = [
-					'nama_lengkap' => $formulir['nama_lengkap'],
-					'role_id' => $formulir['role_id']
-				];
-				$this->session->set_userdata($data);
-				if ($formulir['role_id'] == 2) {
-					redirect(base_url('index.php/Welcome/data_ortu'));
+		$phone_number = $this->input->post('no_wa');
+		$pembayaran = $this->db->get_where('bukti_pembayaran', ['no_wa' => $phone_number])->row_array();
+		if ($this->form_validation->run() == false) {
+			$this->load->view('phone_verification');
+		} else {
+			if ($pembayaran) {
+				if ($phone_number == $pembayaran['no_wa']) {
+					$data = [
+						'no_wa' => $pembayaran['no_wa']
+					];
+					$this->session->set_userdata($data);
+					if ($pembayaran['no_wa'] == $phone_number) {
+						redirect(base_url('index.php/Welcome/formulir'));
+					} else {
+						redirect(base_url('index.php/Welcome/phone_verification'));
+					}
 				} else {
-					redirect(base_url('index.php/Welcome/laman_login'));
+					$this->session->set_flashdata(
+						'message',
+						'<div class="alert alert-danger" role="alert">
+						NOMER SALAH 
+					</div>'
+					);
+					redirect(base_url('index.php/Welcome/phone_verification'));
 				}
 			} else {
 				$this->session->set_flashdata(
 					'message',
 					'<div class="alert alert-danger" role="alert">
-						NAMA SALAH! 
-					</div>'
-				);
-				redirect(base_url('index.php/Welcome/laman_login'));
-			}
-		} else {
-			$this->session->set_flashdata(
-				'message',
-				'<div class="alert alert-danger" role="alert">
-					NAMA SALAH! 
+					NOMER SALAH
 				</div>'
-			);
-			redirect(base_url('index.php/Welcome/laman_login'));
+				);
+				redirect(base_url('index.php/Welcome/phone_verification'));
+			}
 		}
 	}
-	public function input_wali()
+	public function end_formulir()
 	{
-
-		$namawali = $this->input->post('namawali');
-		$alamatwali = $this->input->post('alamatwali');
-		$nik = $this->input->post('nik');
-		$pendapatan = $this->input->post('pendapatan');
-		$telportu = $this->input->post('telportu');
-
-		$this->model_PPDB->input_wali_mod($namawali, $alamatwali, $nik, $pendapatan, $telportu);
-		redirect(base_url('index.php/Welcome/'));
+		$this->session->unset_userdata('no_wa');
+		redirect(base_url('index.php/Welcome/phone_verification'));
 	}
 }

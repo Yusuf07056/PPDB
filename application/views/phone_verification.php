@@ -37,20 +37,16 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <img src="<?= base_url('asset/images/LOGO.png') ?>" width="5%" align="center">
-                                        <h1 class="h4 text-gray-900 mb-4">LOGIN</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">PHONE VERIVICATION</h1>
                                     </div>
                                     <?= $this->session->flashdata('message'); ?>
-                                    <form action="" class="user" method="post" action="<?= base_url('index.php/Adm_ctrl'); ?>">
+                                    <form action="" class="user" method="post" action="<?= base_url('index.php/Welcome/phone_verification'); ?>">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" id="email" name="email" value="<?= set_value('email'); ?>" aria-describedby="emailHelp" placeholder="Enter Email Address...">
-                                            <small class="text-danger"><?= form_error('email'); ?></small>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="password" name="password" value="<?= set_value('password'); ?>" placeholder="Password">
-                                            <small class="text-danger"><?= form_error('password'); ?></small>
+                                            <input type="text" class="form-control form-control-user" id="no_wa" name="no_wa" aria-describedby="emailHelp" placeholder="ENTER MOBILE NUMBER.......">
+                                            <small class="text-danger"><?= form_error('no_wa'); ?></small>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            CONFIRM
                                         </button>
                                     </form>
                                     <hr>

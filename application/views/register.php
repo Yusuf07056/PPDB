@@ -58,7 +58,7 @@
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="<?= base_url('index.php/Adm_ctrl'); ?>">Sudah punya akun? Login!</a>
+                                <a class="btn-small" href="<?= base_url('index.php/Adm_ctrl/PPDB'); ?>">BACK</a>
                             </div>
                         </div>
                     </div>
