@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
+
 class Welcome extends CI_Controller
 {
 
@@ -7,6 +9,8 @@ class Welcome extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('model_PPDB');
+		//$this->load->library('dompdf_gen');
+		$this->load->library('pdf_report');
 		$this->load->helper(array('form', 'url'));
 	}
 
@@ -68,7 +72,7 @@ class Welcome extends CI_Controller
 
 	public function konfirmasi()
 	{
-		$this->load->view('laman_confirm');
+		$this->load->view('laman_conf');
 	}
 	#auto increment
 	public function formulir()
@@ -186,8 +190,51 @@ class Welcome extends CI_Controller
 			$data['pendapatan'] = $pendapatan;
 			$data['no_hp_ortu'] = $telportu;
 			$this->db->insert('formulir', $data);
-			redirect(base_url('index.php/Welcome/konfirmasi'));
+			/*$this->model_PPDB->input_formulir(
+				$no_daftar,
+				$namalengkap,
+				$jk,
+				$kotakelahiran,
+				$tglkelahiran,
+				$agama,
+				$anakke,
+				$saudara,
+				$alamat,
+				$rt,
+				$rw,
+				$kelurahan,
+				$kecamatan,
+				$kabupaten,
+				$Provinsi,
+				$kodepos,
+				$telp,
+				$nisn,
+				$asal,
+				$alamatasal,
+				$foto,
+				$namawali,
+				$alamatwali,
+				$no_kk,
+				$pendapatan,
+				$telportu
+			);*/
+
+			$this->pdf_generate();
+			/*$ukuran_kertas = 'A4';
+			$orientasi = 'portrait';
+			$html = $this->output->get_output();
+			$this->dompdf->set_paper($ukuran_kertas, $orientasi);
+			$this->dompdf->load_html($html);
+			$this->dompdf->render();
+			$this->dompdf->stream("FORMULIR.pdf", array('attachment' => false));*/
 		}
+	}
+	function pdf_generate()
+	{
+		# code...
+		$no_daftar = $this->input->post('id_formulir');
+		$data['formulir'] = $this->model_PPDB->get_form_select($no_daftar);
+		$this->load->view('PDF_PRINT', $data);
 	}
 	public function phone_verification()
 	{
@@ -242,5 +289,8 @@ class Welcome extends CI_Controller
 	{
 		$this->session->unset_userdata('no_wa');
 		redirect(base_url('index.php/Welcome/phone_verification'));
+	}
+	public function lihat_pengumuman()
+	{
 	}
 }

@@ -3,7 +3,7 @@
 
 <head>
     <title>PPDB SMA IPIEMS</title>
-    <link rel="stylesheet" href="<?php echo base_url('asset/css/style_daftar.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('asset/css/style_daftar.css'); ?>">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('asset/images/LOGO.png') ?>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js"></script>
@@ -13,7 +13,7 @@
 <body>
 
     <!-- BAGIAN FORMULIR -->
-    <section class="boxform">
+    <div class="boxform">
         <div class="judul" align="center">
             <img src="<?= base_url('asset/images/LOGO.png'); ?>" alt="" width="10%">
         </div>
@@ -51,22 +51,28 @@
         <form method="post" action="<?= base_url('index.php/Welcome/input_bukti'); ?>" enctype="multipart/form-data">
             <div class=" box">
                 <table class="table">
+
                     <tr>
-                        <td>Upload Bukti Pembayaran</td>
                         <td>
-                            <input type="file" name="gambarbukti" id="gambarbukti" required>
+                            <label for="gambarbukti">Upload Bukti Pembayaran</label>
+                        </td>
+                        <td class=>
+                            <input type="file" name="gambarbukti" id="gambarbukti" class="inputstyle" required>
                         </td>
                     </tr>
+
                     <tr>
-                        <td>KONTAK WA</td>
+                        <td style="width: 25%;margin-top: 6px;">
+                            <label for="kontak_wa">KONTAK WA</label>
+                        </td>
                         <td>
-                            <input type="text" name="kontak_wa" id="kontak_wa" required>
+                            <input type="text" name="kontak_wa" id="kontak_wa" placeholder="NOMER WA" class="inputstyle" required>
                         </td>
                     </tr>
                     <tr>
                         <td><span></span></td>
-                        <td>
-                            <div class="g-recaptcha" data-type="image" data-sitekey="6Leyq6IaAAAAAArYMObJxi-O-jOaD37DRNhxKT4S"></div>
+                        <td class=>
+                            <div id="captcha" class="g-recaptcha" data-type="image" data-sitekey="6Leyq6IaAAAAAArYMObJxi-O-jOaD37DRNhxKT4S"></div>
 
                         </td>
                     </tr>
@@ -74,14 +80,13 @@
                     <tr>
                         <td></td>
                         <td>
-
                             <input type="submit" name="submit" value="konfirm" class="btn1">
                         </td>
                     </tr>
                 </table>
             </div>
         </form>
-    </section>
+    </div>
 
 </body>
 

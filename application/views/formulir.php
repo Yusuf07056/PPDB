@@ -43,9 +43,7 @@
 
                     <table class="table">
                         <tr>
-                            <td>No daftar</td>
                             <td>
-                                <input type="text" name="id_formulir" class="inputstyle" value="<?= sprintf($no_daftar) ?>" disabled>
                                 <input type="hidden" name="id_formulir" class="inputstyle" value="<?= sprintf($no_daftar) ?>">
                             </td>
                         </tr>

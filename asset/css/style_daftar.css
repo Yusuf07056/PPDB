@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Quicksand' ;
+    box-sizing: border-box;
 }
 
 body{
@@ -10,9 +11,10 @@ body{
 }
 
 .boxform {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
     width: 50%;
-    margin: 100px auto;
-    border: solid #fff;
 }
 .boxform2 {
     width: 70%;
@@ -36,14 +38,16 @@ body{
     width: 100%;
 }
 
-.table tr td:nth-child(1){
+/*.table tr td:nth-child(1){
     width: 30%;
-}
+}*/
 
 .inputstyle {
     padding: 5px 10px;
     font-size: 16px;
     margin: 5px 0;
+    width: 50%;
+    resize: vertical;
 }
 
 .btn1{
@@ -128,3 +132,64 @@ p{
     border: solid #111111;
     color: #000000;
   }
+  /*desain responsive*/
+  input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  padding: 10px 17px;
+    background-color: #4a99d7;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    margin-top: 50px;
+    width: 50%;
+}
+
+input[type=submit]:hover {
+  cursor: pointer;
+    background-color: #4881AE;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, .btn1 {
+    width: 100%;
+    margin-top: 0;
+  }
+}
