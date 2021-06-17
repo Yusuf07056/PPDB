@@ -74,10 +74,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <p>LINK</p>
+                            <p>NOMER HP</p>
                         </td>
                         <td>
-                            <input type="text" value="<?= $view_table['id_bukti'] ?>" name="Link" id="myBtn">
+                            <input type="text" value="<?= $view_table['no_wa'] ?>" name="no_wa" id="myBtn">
                         </td>
                     </tr>
                     <tr>

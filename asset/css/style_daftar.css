@@ -14,7 +14,8 @@ body{
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-    width: 50%;
+    width: 70%;
+    align-content: center;
 }
 .boxform2 {
     width: 70%;
@@ -30,7 +31,6 @@ body{
 .box {
     background-color: #ffff;
     padding: 10px;
-    box-sizing: border-box;
     
 }
 
@@ -47,7 +47,6 @@ body{
     font-size: 16px;
     margin: 5px 0;
     width: 50%;
-    resize: vertical;
 }
 
 .btn1{
@@ -187,8 +186,8 @@ input[type=submit]:hover {
 }
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .col-25, .col-75, .btn1 {
+@media screen and (max-width: 800px) {
+  .col-25, .col-75, input[type=submit] {
     width: 100%;
     margin-top: 0;
   }

@@ -17,7 +17,14 @@ class Welcome extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('bukti');
+
+		$quota = $this->db->get_where('quota', ['value'])->row_array();
+		$bukti_pembayaran = $this->db->get_where('bukti_pembayaran', ['id_bukti'])->row_array();
+		if ($quota['value'] == $bukti_pembayaran['id_bukti']) {
+			$this->load->view('welcome_message');
+		} else {
+			$this->load->view('bukti');
+		}
 	}
 
 	public function input_bukti()
@@ -77,9 +84,9 @@ class Welcome extends CI_Controller
 	#auto increment
 	public function formulir()
 	{
-		$data['bukti_pembayaran'] = $this->db->get_where('bukti_pembayaran', ['no_wa' => $this->session->userdata('no_wa')])->row_array();
+		$data['validasi_bukti'] = $this->db->get_where('validasi_bukti', ['no_hp_val' => $this->session->userdata('no_hp_val')])->row_array();
 
-		$no_wa = $this->session->userdata('no_wa');
+		$no_wa = $this->session->userdata('no_hp_val');
 
 		if (empty($no_wa)) {
 			$this->session->sess_destroy();
@@ -114,7 +121,6 @@ class Welcome extends CI_Controller
 		$this->form_validation->set_rules('kabupaten', 'Kabupaten/kota', 'required');
 		$this->form_validation->set_rules('Provinsi', 'Provinsi', 'required');
 		$this->form_validation->set_rules('kodepos', 'Kode pos', 'required');
-		$this->form_validation->set_rules('telp', 'Telp', 'required');
 		$this->form_validation->set_rules('nisn', 'Nisn', 'required');
 		$this->form_validation->set_rules('asal', 'Asal sekolah', 'required');
 		$this->form_validation->set_rules('alamatasal', 'Alamat asal sekolah', 'required');
@@ -150,7 +156,6 @@ class Welcome extends CI_Controller
 			$kabupaten = $this->input->post('kabupaten');
 			$Provinsi = $this->input->post('Provinsi');
 			$kodepos = $this->input->post('kodepos');
-			$telp = $this->input->post('telp');
 			$nisn = $this->input->post('nisn');
 			$asal = $this->input->post('asal');
 			$alamatasal = $this->input->post('alamatasal');
@@ -177,7 +182,6 @@ class Welcome extends CI_Controller
 				'kota_kab' => $kabupaten,
 				'provinsi' => $Provinsi,
 				'kode_pos' => $kodepos,
-				'no_hp' => $telp,
 				'nisn' => $nisn,
 				'asal_sekolah' => $asal,
 				'alamat_asal_sekolah' => $alamatasal
@@ -250,18 +254,27 @@ class Welcome extends CI_Controller
 	function phone_verification_function()
 	{
 		$phone_number = $this->input->post('no_wa');
-		$pembayaran = $this->db->get_where('bukti_pembayaran', ['no_wa' => $phone_number])->row_array();
+
+		$validasi_nomer = $this->db->get_where('validasi_bukti', ['no_hp_val' => $phone_number])->row_array();
 		if ($this->form_validation->run() == false) {
 			$this->load->view('phone_verification');
 		} else {
-			if ($pembayaran) {
-				if ($phone_number == $pembayaran['no_wa']) {
+			if ($validasi_nomer) {
+				if ($phone_number == $validasi_nomer['no_hp_val']) {
 					$data = [
-						'no_wa' => $pembayaran['no_wa']
+						'no_hp_val' => $validasi_nomer['no_hp_val'],
+						'stts' => $validasi_nomer['stts']
 					];
 					$this->session->set_userdata($data);
-					if ($pembayaran['no_wa'] == $phone_number) {
-						redirect(base_url('index.php/Welcome/formulir'));
+					$stts = 'TERIMA';
+					if ($validasi_nomer['no_hp_val'] == $phone_number) {
+						if ($validasi_nomer['stts'] == $stts) {
+							# code...
+							redirect(base_url('index.php/Welcome/formulir'));
+						} else {
+							# code...
+							redirect(base_url('index.php/Welcome/phone_verification'));
+						}
 					} else {
 						redirect(base_url('index.php/Welcome/phone_verification'));
 					}

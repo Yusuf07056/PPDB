@@ -328,8 +328,8 @@ class Adm_ctrl extends CI_Controller
         } else {
             $id_bukti = $this->input->post('id_bukti');
             $stts  = $this->input->post('status');
-            $link = $this->input->post('link');
-            $this->model_adm->input_data_validasi($id_bukti, $stts, $link);
+            $no_wa = $this->input->post('no_wa');
+            $this->model_adm->input_data_validasi($id_bukti, $stts, $no_wa);
             redirect(base_url('index.php/Adm_ctrl/PPDB'));
         }
     }

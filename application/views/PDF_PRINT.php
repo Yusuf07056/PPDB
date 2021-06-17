@@ -1,7 +1,7 @@
 <?php
 //============================================================+
-// File name   : example_005.php
-// Begin       : 2008-03-04
+// File name  example_005.php
+// Begin      2008-03-04
 // Last Update : 2013-05-14
 //
 // Description : Example 005 for TCPDF class
@@ -87,141 +87,147 @@ $title = <<< EOD
 EOD;
 
 $pdf->writeHTMLCell(0, 0, '', '', $title, 0, 1, 0, true, 'C', true);
-$table = '<!DOCTYPE html>
+$table = '<table widht="100%">
             ';
-$table .= '<html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <link rel="stylesheet" href="' . base_url('asset/css/gaya.css') . '">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            </head>
-            <body>
-            <div class="desainbawah1" align="center">
-            <table align="CENTER">
-            <tr align="CENTER">
-                        <th></th>
-                        <th></th>
-                        <th></th> 
+$table .= '
+            <tr>
                         <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th></th>
+                
                     </tr>';
 
-$table .= '<tr align="CENTER">';
+$table .= '<tr>';
 $view_bukti = $formulir->result_array();
 foreach ($view_bukti as $view_table) {
     $table .= '<tr>
-                    <td>ID FORMULIR &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['no_daftar'] . '</td>
+                    <td >ID FORMULIR</td>
+                    <td >:</td>
+                    <td >' . $view_table['no_daftar'] . '</td>
+                    <td rowspan="6" ><img src="' . base_url() . 'asset/images/' . $view_table['foto'] . '" style="border-radius: 4px;padding: 5px;width: 180px; height :200px;"></td>
+                
                 </tr>
                 <tr>
-                    <td>NAMA LENGKAP &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['nama_lengkap'] . '</td>
+                    <td widht="15%">NAMA LENGKAP</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['nama_lengkap'] . '</td>
                 </tr>
                 <tr>
-                    <td>GENDER &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['gender'] . '</td>
+                    <td widht="15%">GENDER</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['gender'] . '</td>
                 </tr>
                 <tr>
-                    <td>KOTA &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['kota_kelahiran'] . '</td>
+                    <td widht="15%" >KOTA</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['kota_kelahiran'] . '</td>
                 </tr>
                 <tr>
-                    <td>TANGGAL LAHIR &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['tgl_lahir'] . '</td>
+                    <td widht="15%">TANGGAL LAHIR</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['tgl_lahir'] . '</td>
                 </tr>
                 <tr>
-                    <td>AGAMA &nbsp; &nbsp; :</td>
-                    <td> ' . $view_table['agama'] . '</td>
+                    <td widht="15%">AGAMA</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%"> ' . $view_table['agama'] . '</td>
                 </tr>
                 <tr>
-                    <td>ANAK KE &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['anak_ke'] . '</td>
+                    <td widht="15%">ANAK KE</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['anak_ke'] . '</td>
                 </tr>
                 <tr>
-                    <td>SAUDARA &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['saudara'] . '</td>
+                    <td widht="15%">SAUDARA</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['saudara'] . '</td>
                 </tr>
                 <tr>
-                    <td>ALAMAT &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['alamat'] . '</td>
+                    <td widht="15%">ALAMAT</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['alamat'] . '</td>
                 </tr>
                 <tr>
-                    <td>RT &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['RT'] . '</td>
+                    <td widht="15%">RT</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['RT'] . '</td>
                 </tr>
                 <tr>
-                    <td>RW &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['RW'] . '</td>
+                    <td widht="15%">RW</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['RW'] . '</td>
                 </tr>
                 <tr>
-                    <td>KELURAHAN &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['kelurahan'] . '</td>
+                    <td widht="15%">KELURAHAN</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['kelurahan'] . '</td>
                 </tr>
                 <tr>
-                    <td>KECAMATAN &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['kecamatan'] . '</td>
+                    <td widht="15%">KECAMATAN</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['kecamatan'] . '</td>
                 </tr>
                 <tr>
-                    <td>KOTA/KABUPATEN &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['kota_kab'] . '</td>
+                    <td widht="15%">KOTA/KABUPATEN</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['kota_kab'] . '</td>
                 </tr>
                 <tr>
-                    <td>PROVINSI &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['provinsi'] . '</td>
+                    <td widht="15%">PROVINSI</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['provinsi'] . '</td>
                 </tr>
                 <tr>
-                    <td>KODE POS &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['kode_pos'] . '</td>
+                    <td widht="15%">KODE POS</td>
+                    <td widht="1%">:</td>
+                    <td widht="15%">' . $view_table['kode_pos'] . '</td>
                 </tr>
                 <tr>
-                    <td>NO.HP &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['no_hp'] . '</td>
+                    <td widht="15%">NISN</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['nisn'] . '</td>
                 </tr>
                 <tr>
-                    <td>NISN &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['nisn'] . '</td>
+                    <td widht="15%">ASAL SEKOLAH</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['asal_sekolah'] . '</td>
                 </tr>
                 <tr>
-                    <td>ASAL SEKOLAH &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['asal_sekolah'] . '</td>
+                    <td widht="15%">ALAMAT SEKOLAH ASAL</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['alamat_asal_sekolah'] . '</td>
                 </tr>
                 <tr>
-                    <td>ALAMAT SEKOLAH ASAL &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['alamat_asal_sekolah'] . '</td>
+                    <td widht="15%">NAMA WALI</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['nama_orangtua'] . '</td>
                 </tr>
                 <tr>
-                    <td>FOTO &nbsp; &nbsp; :</td>
-                    <td><img src="' . base_url() . 'asset/images/' . $view_table['foto'] . '" style="border-radius: 4px;padding: 5px;width: 150px;"></td>
+                    <td widht="15%">ALAMAT ORANG TUA</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['alamat_orangtua'] . '</td>
                 </tr>
                 <tr>
-                    <td>NAMA WALI &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['nama_orangtua'] . '</td>
+                    <td widht="15%">NOMER KK</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['no_kk'] . '</td>
                 </tr>
                 <tr>
-                    <td>ALAMAT ORANG TUA &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['alamat_orangtua'] . '</td>
+                    <td widht="15%">PENDAPATAN</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['pendapatan'] . '</td>
                 </tr>
                 <tr>
-                    <td>NOMER KK &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['no_kk'] . '</td>
-                </tr>
-                <tr>
-                    <td>PENDAPATAN &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['pendapatan'] . '</td>
-                </tr>
-                <tr>
-                    <td>NO.HP &nbsp; &nbsp; :</td>
-                    <td>' . $view_table['no_hp_ortu'] . '</td>
+                    <td widht="15%">NO.HP WALI</td>
+                    <td widht="1%">:</td>
+                    <td widht="60%">' . $view_table['no_hp_ortu'] . '</td>
                 </tr>
                 </tr>';
 }
 $table .= '</table>
-        </div>
-        </body>
-        </html>';
+        </div>';
 $pdf->writeHTML($table, true, false, true, false, '');
 
 // set some text for example

@@ -13,7 +13,7 @@
 <body>
 
     <!-- BAGIAN FORMULIR -->
-    <div class="boxform">
+    <div class="boxform boxform2">
         <div class="judul" align="center">
             <img src="<?= base_url('asset/images/LOGO.png'); ?>" alt="" width="10%">
         </div>

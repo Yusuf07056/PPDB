@@ -125,7 +125,7 @@
                             <th>ID validasi</th>
                             <th>BUKTI</th>
                             <th>STATUS</th>
-                            <th>LINK</th>
+                            <th>NOMER HP</th>
                             <th>PILIHAN</th>
                         </tr>
                     </thead>
@@ -140,7 +140,7 @@
                                     <a style="color: black;" href="<?php echo base_url('index.php/Adm_ctrl/edit_validasi_bukti/') . $view_table['id_bukti'] ?>"><?= $view_table['id_bukti'] ?></a>
                                 </td>
                                 <td><?= $view_table['stts'] ?></td>
-                                <td><?= "localhost/"; ?><?= $view_table['link'] ?></td>
+                                <td><?= $view_table['no_hp_val'] ?></td>
                                 <td>
                                     <dl>
                                         <dt>

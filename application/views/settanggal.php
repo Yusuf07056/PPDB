@@ -37,12 +37,12 @@
             SET TANGGAL PPDB
             <table align="CENTER">
                 <tr>
-                    <td>MULAI</td>
-                    <td><input type="date" name="tanggal_mulai"></td>
+                    <td>ID QUOTA</td>
+                    <td><input type="text" name="id_quota"></td>
                 </tr>
                 <tr>
-                    <td>SELESAI</td>
-                    <td><input type="date" name="tanggal_selesai"></td>
+                    <td>QUOTA</td>
+                    <td><input type="number" name="value"></td>
                 </tr>
             </table>
             <button class="desain_tombol">SUBMIT</button>

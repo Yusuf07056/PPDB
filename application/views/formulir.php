@@ -13,7 +13,7 @@
 
     <!-- BAGIAN FORMULIR -->
     <!-- BAGIAN FORMULIR -->
-    <section class="boxform">
+    <section class="boxform boxform2">
         <div class="judul" align="center">
             <img src="<?php echo base_url('asset/images/LOGO.png'); ?>" alt="" width="10%">
         </div>
@@ -155,14 +155,6 @@
                                 <input type="number" name="kodepos" class="inputstyle" placeholder="kodepos">
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>Telp</td>
-                            <td>
-                                <input type="number" name="telp" class="inputstyle" placeholder="telp">
-                            </td>
-                        </tr>
-
 
                         <tr>
                             <td>Upload Foto</td>

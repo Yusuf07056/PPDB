@@ -13,6 +13,11 @@ class model_adm extends CI_Model
         $query = $this->db->get('registrasi');
         return $query;
     }
+    function get_quota()
+    {
+        $query = $this->db->get('quota');
+        return $query;
+    }
 
     public function login()
     {
@@ -117,13 +122,12 @@ class model_adm extends CI_Model
         $query = $this->db->get('formulir');
         return $query;
     }
-    function input_data_validasi($id_bukti, $stts, $link)
+    function input_data_validasi($id_bukti, $stts, $no_wa)
     {
-        $encrypted_string = $this->encryption->encrypt($link);
         $data = array(
             'id_bukti' => $id_bukti,
             'stts' => $stts,
-            'link' => $encrypted_string
+            'no_hp_val' => $no_wa
         );
         $this->db->insert('validasi_bukti', $data);
     }
