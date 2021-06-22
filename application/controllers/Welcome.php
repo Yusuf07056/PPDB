@@ -30,7 +30,7 @@ class Welcome extends CI_Controller
 	{
 		$captcha_respon = trim($this->input->post('g-recaptcha-response'));
 		if ($captcha_respon != '') {
-			$key_sec = '6Leyq6IaAAAAABkhdDrY5z2WJGA8e6aMuFvxzXAj';
+			$key_sec = '6LehXE0bAAAAAGupdos_2419wuVT7UABQZyboXLu';
 			$check = array(
 				'secret' => $key_sec,
 				'response' => $this->input->post('g-recaptcha-response')

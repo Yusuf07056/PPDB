@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>LIST KONTAK ADMIN</title>
+    <title>PPDB SMA IPIEMS</title>
     <link rel="stylesheet" href="<?= base_url('asset/css/style_daftar.css'); ?>">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('asset/images/LOGO.png') ?>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -81,7 +81,7 @@
                     <tr>
                         <td><span></span></td>
                         <td class=>
-                            <div id="captcha" class="g-recaptcha" data-type="image" data-sitekey="6Leyq6IaAAAAAArYMObJxi-O-jOaD37DRNhxKT4S"></div>
+                            <div id="captcha" class="g-recaptcha" data-type="image" data-sitekey="6LehXE0bAAAAAPXVA3dVCv33rc8Y85JrqoUqihpY"></div>
 
                         </td>
                     </tr>

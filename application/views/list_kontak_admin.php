@@ -18,13 +18,10 @@
 			<img src="<?= base_url('asset/images/LOGO.png'); ?>" alt="" width="10%">
 		</div>
 		<div class="judul">
-			<h2 class="judulh2">Formulir Pendaftaran Siswa Baru SMA IPIEMS</h2>
+			<h2 class="judulh2">LIST KONTAK ADMIN</h2>
 			<br>
-			<h3 class="subjudul">Bukti Pembayaran</h3>
+			<h3 class="subjudul"> </h3>
 			<br>
-			<p>
-				Silahkan transfer ke Rekening BNI 1125085330 atas nama Beny Wahyudi senilai Rp. 100.000 dan upload bukti pembayaran, selanjutnya anda bisa mengisi formulir pendaftaran.
-			</p>
 		</div>
 		<?php
 		if ($this->session->flashdata('message')) {
@@ -50,10 +47,24 @@
 		?>
 		<form method="post" action="<?= base_url('index.php/Welcome/input_bukti'); ?>" enctype="multipart/form-data">
 			<div class=" box">
-				<table>
-
+				<table class="table">
+					<tr>
+						<th>NAMA ADMIN</th>
+						<th>KONTAK</th>
+					</tr>
+					<?php
+					$view_bukti = $kontak_admin->result_array();
+					foreach ($view_bukti as $view_table) {
+					?>
+						<tr align="CENTER">
+							<td><?= $view_table['nama_admin'] ?></td>
+							<td><?= $view_table['kontak'] ?></td>
+						</tr>
+					<?php
+					} ?>
 				</table>
 				<table class="table">
+
 
 					<tr>
 						<td></td>

@@ -192,3 +192,16 @@ input[type=submit]:hover {
     margin-top: 0;
   }
 }
+table {
+  border-collapse: collapse;
+  background-color: white;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color:#d4d3d3;}

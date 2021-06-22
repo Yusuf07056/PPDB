@@ -35,7 +35,7 @@
             <div class="tab">
                 <button class="tablinks" onclick="openCity(event, 'London')" id="Utama">Data siswa</button>
                 <button class="tablinks" onclick="openCity(event, 'Paris')">Data wali</button>
-                <button class="tablinks" onclick="openCity(event, 'Tokyo')">sekolah</button>
+                <button class="tablinks" onclick="openCity(event, 'Tokyo')">Sekolah</button>
             </div>
             <form method="post" action="<?php echo base_url('index.php/Welcome/input_form'); ?>" enctype="multipart/form-data">
                 <!-- Tab content -->
