@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>registrasi</title>
-
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('asset/images/LOGO.png') ?>">
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('asset/vendor/fontawesome-free/css/all.min.css'); ?>" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -22,6 +22,21 @@
 
 <body style="background-color: #1C2833;">
     <div class="container">
+        <?php
+        if ($this->session->flashdata('message')) {
+        ?>
+            <?=
+            $this->session->flashdata('message');
+            ?>
+        <?php
+        }
+        if ($this->session->flashdata('success_message')) {
+        ?>
+            <?=
+            $this->session->flashdata('success_message');
+            ?>
+        <?php
+        } ?>
 
         <div class="card o-hidden border-0 shadow-lg my-5 col-lg-7 mx-auto">
             <div class="card-body p-0">
@@ -41,6 +56,10 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="email" name="email" placeholder="Email Address" value="<?= set_value('email'); ?>">
                                     <small class="text-danger"><?= form_error('email'); ?></small>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="kontak" name="kontak" placeholder="Nomer Wa">
+                                    <small class="text-danger"><?= form_error('kontak'); ?></small>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">

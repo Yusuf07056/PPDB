@@ -37,19 +37,19 @@
         </div>
         <div id="mySidenav" class="sidenav">
             <button class="closebtn" onclick="closeNav()">&times;</button>
-            <a href="<?= base_url('index.php/Adm_ctrl/profil') ?>">
-                <i class='fas fa-user-tie' style='font-size:36px; color: white;'></i>
-                <?php
-                $view_bukti = $registrasi->result_array();
-                foreach ($view_bukti as $view_table) {
-                ?>
+            <?php
+            $view_bukti = $registrasi->result_array();
+            foreach ($view_bukti as $view_table) {
+            ?>
+                <a href="<?= base_url('index.php/Adm_ctrl/profil/') . $view_table['nama'] ?>">
+                    <i class='fas fa-user-tie' style='font-size:36px; color: white;'></i>
+
                     <?= $view_table['nama'] ?>
-                <?php
-                }
-                ?>
-            </a>
+                </a>
+            <?php
+            }
+            ?>
             <a href="<?= base_url('index.php/Adm_ctrl/PPDB') ?>">PENDAFTAR</a>
-            <a href="<?= base_url('index.php/Adm_ctrl/settanggal') ?>">KUOTA</a>
             <a href="<?= base_url('index.php/Adm_ctrl/register') ?>">TAMBAH ADMIN</a>
             <a href="<?= base_url('index.php/Adm_ctrl/logout') ?>">
                 <i class="fas fa-sign-out-alt"></i>LOGOUT
@@ -62,9 +62,21 @@
             <!-- Tab content -->
             <div id="London" class="tabcontent">
                 <div>
+                    <form action="<?= base_url('index.php/Adm_ctrl/PPDB') ?>" method="post">
+                        <table>
+                            <tr>
+                                <td>
+                                    <button class="desain_tombol"> REFRESH
+                                        <i class="fa fa-refresh fa-spin" style="font-size:24px"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                     <table align="CENTER">
                         <tr align="CENTER">
                             <th>ID BUKTI</th>
+                            <th>ATAS NAMA</th>
                             <th>GAMBAR</th>
                             <th>NOMER WA</th>
                             <th>PILIHAN</th>
@@ -75,6 +87,7 @@
                         ?>
                             <tr align="CENTER">
                                 <td><?= $view_table['id_bukti'] ?></td>
+                                <td><?= $view_table['atas_nama'] ?></td>
                                 <td>
                                     <img src="<?= base_url() . 'asset/images/' . $view_table['bukti_transfer'] ?>" width="100" height="100">
 
@@ -126,7 +139,6 @@
                             <th>BUKTI</th>
                             <th>STATUS</th>
                             <th>NOMER HP</th>
-                            <th>PILIHAN</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -141,16 +153,6 @@
                                 </td>
                                 <td><?= $view_table['stts'] ?></td>
                                 <td><?= $view_table['no_hp_val'] ?></td>
-                                <td>
-                                    <dl>
-                                        <dt>
-                                            <a href="<?php echo base_url('index.php/Adm_ctrl/validasi_bukti/') . $view_table['id_bukti'] ?>" class="desain_tombol">PROSES</a>
-                                        </dt>
-                                        <dt>
-                                            <a href="<?php echo base_url('index.php/Adm_ctrl/lihat/') . $view_table['id_bukti'] ?>" class="desain_tombol">LIHAT</a>
-                                        </dt>
-                                    </dl>
-                                </td>
                             </tr>
                         <?php
                         }
@@ -180,6 +182,7 @@
                         <th>ASAL SEKOLAH</th>
                         <th>FOTO</th>
                         <th>NAMA WALI</th>
+                        <th>PILIHAN</th>
                     </tr>
                     <?php
                     $view_bukti = $formulir->result_array();
@@ -196,38 +199,28 @@
                             <td>
                                 <dl>
                                     <dt>
-                                        <a href="<?php echo base_url('index.php/Adm_ctrl/lihat_detail/') . $view_table['no_daftar'] ?>" class="desain_tombol">DETAIL</a>
+                                        <a href="<?= base_url('index.php/Adm_ctrl/pdf_generate/') . $view_table['no_daftar'] ?>" class="fas fa-file-pdf" style='font-size:18px;color:#00aec9'>GENERATE PDF</a>
                                     </dt>
                                     <dt>
-                                        <a href="<?php echo base_url('') . $view_table['no_daftar'] ?>" class="desain_tombol">LIHAT</a>
+                                        <a href="<?= base_url('index.php/Adm_ctrl/lihat_detail/') . $view_table['no_daftar'] ?>" class="fas fa-eye" style="font-size:18px;color:#00aec9">LIHAT DETAIL</a>
                                     </dt>
                                 </dl>
+
                             </td>
                         </tr>
+
                     <?php
                     }
                     ?>
                 </table>
 
-                <!-- <div class="tab">
-                    <button class="tablinks" onclick="openTab(event, 'surabaya')">1</button>
-                    <button class="tablinks" onclick="openTab(event, 'sidoarjo')">2</button>
-                    <button class="tablinks" onclick="openTab(event, 'malang')">3</button>
-                </div>
-                <div id="surabaya" class="tabcontent2">
-
-                </div>
-                <div id="sidoarjo" class="tabcontent2">
-                </div>
-                <div id="malang" class="tabcontent2">
-                </div> -->
             </div>
         </div>
-        <script language="javascript" src=" <?= base_url('asset/js/design.js') ?>"></script>
-        <!-- <script language="javascript" src=" <?= base_url('asset/js/design_2.js') ?>"></script> -->
-        <script>
-            document.getElementById("Utama").click();
-        </script>
+    </div>
+    <script language="javascript" src=" <?= base_url('asset/js/design.js') ?>"></script>
+    <script>
+        document.getElementById("Utama").click();
+    </script>
 </body>
 
 

@@ -131,6 +131,11 @@ class model_adm extends CI_Model
         );
         $this->db->insert('validasi_bukti', $data);
     }
+    public function delete_bukti($id_bukti)
+    {
+        $this->db->where('id_bukti', $id_bukti);
+        $this->db->delete('bukti_pembayaran');
+    }
     public function get_buktiselect($id_bukti)
     {
         $this->db->where('id_bukti', $id_bukti);
@@ -168,5 +173,32 @@ class model_adm extends CI_Model
     {
         $this->db->where('id_bukti', $id_bukti);
         $this->db->update('validasi_bukti', $data);
+    }
+
+    public function input_list_kontak($nama, $kontak)
+    {
+        $data = array(
+            'nama_admin' => $nama,
+            'kontak' => $kontak
+        );
+        $this->db->insert('kontak_admin', $data);
+    }
+
+    public function update_admin($id_regis, $nama, $password, $email)
+    {
+        $data = array(
+            'nama' => htmlspecialchars($nama),
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'email' => htmlspecialchars($email),
+        );
+
+        $this->db->where(
+            'id_regis',
+            $id_regis
+        );
+        $this->db->update(
+            'registrasi',
+            $data
+        );
     }
 }

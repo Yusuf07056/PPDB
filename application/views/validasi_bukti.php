@@ -29,10 +29,23 @@
         </div>
         <div id="mySidenav" class="sidenav">
             <button class="closebtn" onclick="closeNav()">&times;</button>
-            <a href="<?= base_url('index.php/Adm_ctrl/profil') ?>">PROFIL ADMIN</a>
-            <a href="<?= base_url('index.php/Adm_ctrl/PPDB') ?>">PENDAFTAR</a>
-            <a href="<?= base_url('index.php/Adm_ctrl/settanggal') ?>">SET TANGGAL</a>
-            <a href="<?= base_url('index.php/Adm_ctrl/logout') ?>"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>
+            <?php
+            $view_bukti = $registrasi->result_array();
+            foreach ($view_bukti as $view_table) {
+            ?>
+                <a href="<?= base_url('index.php/Adm_ctrl/profil/') . $view_table['nama'] ?>">
+                    <i class='fas fa-user-tie' style='font-size:36px; color: white;'></i>
+
+                    <?= $view_table['nama'] ?>
+                <?php
+            }
+                ?>
+                </a>
+                <a href="<?= base_url('index.php/Adm_ctrl/PPDB') ?>">PENDAFTAR</a>
+                <a href="<?= base_url('index.php/Adm_ctrl/register') ?>">TAMBAH ADMIN</a>
+                <a href="<?= base_url('index.php/Adm_ctrl/logout') ?>">
+                    <i class="fas fa-sign-out-alt"></i>LOGOUT
+                </a>
         </div>
 
         <div class="desainbawah1" align="center">

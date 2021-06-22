@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>PPDB SMA IPIEMS</title>
+    <title>LIST KONTAK ADMIN</title>
     <link rel="stylesheet" href="<?= base_url('asset/css/style_daftar.css'); ?>">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('asset/images/LOGO.png') ?>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -54,6 +54,15 @@
 
                     <tr>
                         <td>
+                            <label for="atas_nama">Atas Nama</label>
+                        </td>
+                        <td class=>
+                            <input type="text" name="atas_nama" id="atas_nama" class="inputstyle" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
                             <label for="gambarbukti">Upload Bukti Pembayaran</label>
                         </td>
                         <td class=>
@@ -81,6 +90,13 @@
                         <td></td>
                         <td>
                             <input type="submit" name="submit" value="konfirm" class="btn1">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a href="<?= base_url('index.php/Welcome/list_admin') ?>">ADA MASALAH?, HUBUNGI ADMIN</a>
                         </td>
                     </tr>
                 </table>

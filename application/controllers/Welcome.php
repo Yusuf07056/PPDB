@@ -17,14 +17,13 @@ class Welcome extends CI_Controller
 
 	public function index()
 	{
+		$this->load->view('bukti');
+	}
 
-		$quota = $this->db->get_where('quota', ['value'])->row_array();
-		$bukti_pembayaran = $this->db->get_where('bukti_pembayaran', ['id_bukti'])->row_array();
-		if ($quota['value'] == $bukti_pembayaran['id_bukti']) {
-			$this->load->view('welcome_message');
-		} else {
-			$this->load->view('bukti');
-		}
+	public function list_admin()
+	{
+		$data['kontak_admin'] = $this->model_PPDB->get_kontak_admin();
+		$this->load->view('list_kontak_admin', $data);
 	}
 
 	public function input_bukti()
@@ -49,6 +48,7 @@ class Welcome extends CI_Controller
 			if ($final_respon['success']) {
 
 				$data['bukti_transfer'] = '';
+				$atas_nama = $this->input->post('atas_nama');
 				$wa = $this->input->post('kontak_wa');
 				$foto = $_FILES['gambarbukti']['name'];
 				$config['upload_path'] = './asset/images';
@@ -58,7 +58,7 @@ class Welcome extends CI_Controller
 				if (!$this->upload->do_upload('gambarbukti')) {
 					echo "upload gagal";
 				} else {
-
+					$data['atas_nama'] = $atas_nama;
 					$foto = $this->upload->data('file_name');
 					$data['bukti_transfer'] = $foto;
 					$data['no_wa'] = $wa;
@@ -99,12 +99,29 @@ class Welcome extends CI_Controller
 			$this->load->view('formulir', $data);
 		}
 	}
+	public function generate_pdf_page()
+	{
+		$data['validasi_bukti'] = $this->db->get_where('validasi_bukti', ['no_hp_val' => $this->session->userdata('no_hp_val')])->row_array();
+
+		$no_wa = $this->session->userdata('no_hp_val');
+
+		if (empty($no_wa)) {
+			$this->session->sess_destroy();
+			redirect(base_url('index.php/Welcome/phone_verification'));
+		} else {
+			$this->load->view('generate_pdf_page');
+		}
+	}
+	public function generating_pdf()
+	{
+		$namalengkap = $this->input->post('namalengkap');
+		$data['formulir'] = $this->model_PPDB->get_form_select_nama($namalengkap);
+		$this->load->view('PDF_PRINT', $data);
+	}
 
 
 	public function input_form()
 	{
-
-
 		$this->form_validation->set_rules('id_formulir', 'nomer daftar', 'required');
 		$this->form_validation->set_rules('namalengkap', 'Nama lengkap', 'required');
 		$this->form_validation->set_rules('jk', 'Gender', 'required');
@@ -130,7 +147,6 @@ class Welcome extends CI_Controller
 		$this->form_validation->set_rules('pendapatan', 'pendapatan', 'required');
 		$this->form_validation->set_rules('telportu', 'telp wali', 'required');
 
-
 		$data['foto'] = '';
 		$foto = $_FILES['gambar']['name'];
 		$config['upload_path'] = './asset/images';
@@ -140,102 +156,69 @@ class Welcome extends CI_Controller
 		if (!$this->upload->do_upload('gambar') || $this->form_validation->run() == false) {
 			$this->load->view('formulir');
 		} else {
-			$no_daftar = $this->input->post('id_formulir');
-			$namalengkap = $this->input->post('namalengkap');
-			$jk = $this->input->post('jk');
-			$kotakelahiran = $this->input->post('kotakelahiran');
-			$tglkelahiran = $this->input->post('tglkelahiran');
-			$agama = $this->input->post('agama');
-			$anakke = $this->input->post('anakke');
-			$saudara = $this->input->post('saudara');
-			$alamat = $this->input->post('alamat');
-			$rt = $this->input->post('rt');
-			$rw = $this->input->post('rw');
-			$kelurahan = $this->input->post('kelurahan');
-			$kecamatan = $this->input->post('kecamatan');
-			$kabupaten = $this->input->post('kabupaten');
-			$Provinsi = $this->input->post('Provinsi');
-			$kodepos = $this->input->post('kodepos');
-			$nisn = $this->input->post('nisn');
-			$asal = $this->input->post('asal');
-			$alamatasal = $this->input->post('alamatasal');
-			$namawali = $this->input->post('namawali');
-			$alamatwali = $this->input->post('alamatwali');
-			$no_kk = $this->input->post('no_kk');
-			$pendapatan = $this->input->post('pendapatan');
-			$telportu = $this->input->post('telportu');
-			$foto = $this->upload->data('file_name');
-			$data = [
-				'no_daftar' => $no_daftar,
-				'nama_lengkap' => $namalengkap,
-				'gender' => $jk,
-				'kota_kelahiran' => $kotakelahiran,
-				'tgl_lahir' => $tglkelahiran,
-				'agama' => $agama,
-				'anak_ke' => $anakke,
-				'saudara' => $saudara,
-				'alamat' => $alamat,
-				'rt' => $rt,
-				'rw' => $rw,
-				'kelurahan' => $kelurahan,
-				'kecamatan' => $kecamatan,
-				'kota_kab' => $kabupaten,
-				'provinsi' => $Provinsi,
-				'kode_pos' => $kodepos,
-				'nisn' => $nisn,
-				'asal_sekolah' => $asal,
-				'alamat_asal_sekolah' => $alamatasal
+			try {
+				$no_daftar = $this->input->post('id_formulir');
+				$namalengkap = $this->input->post('namalengkap');
+				$jk = $this->input->post('jk');
+				$kotakelahiran = $this->input->post('kotakelahiran');
+				$tglkelahiran = $this->input->post('tglkelahiran');
+				$agama = $this->input->post('agama');
+				$anakke = $this->input->post('anakke');
+				$saudara = $this->input->post('saudara');
+				$alamat = $this->input->post('alamat');
+				$rt = $this->input->post('rt');
+				$rw = $this->input->post('rw');
+				$kelurahan = $this->input->post('kelurahan');
+				$kecamatan = $this->input->post('kecamatan');
+				$kabupaten = $this->input->post('kabupaten');
+				$Provinsi = $this->input->post('Provinsi');
+				$kodepos = $this->input->post('kodepos');
+				$nisn = $this->input->post('nisn');
+				$asal = $this->input->post('asal');
+				$alamatasal = $this->input->post('alamatasal');
+				$namawali = $this->input->post('namawali');
+				$alamatwali = $this->input->post('alamatwali');
+				$no_kk = $this->input->post('no_kk');
+				$pendapatan = $this->input->post('pendapatan');
+				$telportu = $this->input->post('telportu');
+				$foto = $this->upload->data('file_name');
+				$data = [
+					'no_daftar' => $no_daftar,
+					'nama_lengkap' => $namalengkap,
+					'gender' => $jk,
+					'kota_kelahiran' => $kotakelahiran,
+					'tgl_lahir' => $tglkelahiran,
+					'agama' => $agama,
+					'anak_ke' => $anakke,
+					'saudara' => $saudara,
+					'alamat' => $alamat,
+					'rt' => $rt,
+					'rw' => $rw,
+					'kelurahan' => $kelurahan,
+					'kecamatan' => $kecamatan,
+					'kota_kab' => $kabupaten,
+					'provinsi' => $Provinsi,
+					'kode_pos' => $kodepos,
+					'nisn' => $nisn,
+					'asal_sekolah' => $asal,
+					'alamat_asal_sekolah' => $alamatasal
 
-			];
-			$data['foto'] = $foto;
-			$data['nama_orangtua'] = $namawali;
-			$data['alamat_orangtua'] = $alamatwali;
-			$data['no_kk'] = $no_kk;
-			$data['pendapatan'] = $pendapatan;
-			$data['no_hp_ortu'] = $telportu;
-			$this->db->insert('formulir', $data);
-			/*$this->model_PPDB->input_formulir(
-				$no_daftar,
-				$namalengkap,
-				$jk,
-				$kotakelahiran,
-				$tglkelahiran,
-				$agama,
-				$anakke,
-				$saudara,
-				$alamat,
-				$rt,
-				$rw,
-				$kelurahan,
-				$kecamatan,
-				$kabupaten,
-				$Provinsi,
-				$kodepos,
-				$telp,
-				$nisn,
-				$asal,
-				$alamatasal,
-				$foto,
-				$namawali,
-				$alamatwali,
-				$no_kk,
-				$pendapatan,
-				$telportu
-			);*/
-
-			$this->pdf_generate();
-			/*$ukuran_kertas = 'A4';
-			$orientasi = 'portrait';
-			$html = $this->output->get_output();
-			$this->dompdf->set_paper($ukuran_kertas, $orientasi);
-			$this->dompdf->load_html($html);
-			$this->dompdf->render();
-			$this->dompdf->stream("FORMULIR.pdf", array('attachment' => false));*/
+				];
+				$data['foto'] = $foto;
+				$data['nama_orangtua'] = $namawali;
+				$data['alamat_orangtua'] = $alamatwali;
+				$data['no_kk'] = $no_kk;
+				$data['pendapatan'] = $pendapatan;
+				$data['no_hp_ortu'] = $telportu;
+				$this->db->insert('formulir', $data);
+				redirect(base_url('index.php/Welcome/generate_pdf_page'));
+			} catch (Exception $ex) {
+				redirect(base_url('idnex.php/welcome/formulir'));
+			}
 		}
 	}
 	function pdf_generate()
 	{
-		# code...
 		$no_daftar = $this->input->post('id_formulir');
 		$data['formulir'] = $this->model_PPDB->get_form_select($no_daftar);
 		$this->load->view('PDF_PRINT', $data);
@@ -302,8 +285,5 @@ class Welcome extends CI_Controller
 	{
 		$this->session->unset_userdata('no_wa');
 		redirect(base_url('index.php/Welcome/phone_verification'));
-	}
-	public function lihat_pengumuman()
-	{
 	}
 }

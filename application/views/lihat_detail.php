@@ -29,10 +29,23 @@
         </div>
         <div id="mySidenav" class="sidenav">
             <button class="closebtn" onclick="closeNav()">&times;</button>
-            <a href="<?= base_url('index.php/Adm_ctrl/profil') ?>">PROFIL ADMIN</a>
+            <?php
+            $view_bukti = $registrasi->result_array();
+            foreach ($view_bukti as $view_table) {
+            ?>
+                <a href="<?= base_url('index.php/Adm_ctrl/profil/') . $view_table['nama'] ?>">
+                    <i class='fas fa-user-tie' style='font-size:36px; color: white;'></i>
+
+                    <?= $view_table['nama'] ?>
+                </a>
+            <?php
+            }
+            ?>
             <a href="<?= base_url('index.php/Adm_ctrl/PPDB') ?>">PENDAFTAR</a>
-            <a href="<?= base_url('index.php/Adm_ctrl/settanggal') ?>">SET TANGGAL</a>
-            <a href="<?= base_url('index.php/Adm_ctrl/logout') ?>"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>
+            <a href="<?= base_url('index.php/Adm_ctrl/register') ?>">TAMBAH ADMIN</a>
+            <a href="<?= base_url('index.php/Adm_ctrl/logout') ?>">
+                <i class="fas fa-sign-out-alt"></i>LOGOUT
+            </a>
         </div>
 
         <div class="desainbawah1" align="center">
@@ -109,10 +122,6 @@
                         <td><?= $view_table['kode_pos'] ?></td>
                     </tr>
                     <tr>
-                        <td>NO HP/WA</td>
-                        <td><?= $view_table['no_hp'] ?></td>
-                    </tr>
-                    <tr>
                         <td>NISN</td>
                         <td><?= $view_table['nisn'] ?></td>
                     </tr>
@@ -151,16 +160,19 @@
                     </tr>
 
 
-                <?php
+                    <tr align="CENTER">
+                        <td>
+                            <a href="<?= base_url('index.php/Adm_ctrl/PPDB') ?>" class="fa fa-backward" style="font-size:24px;color:#00aec9">BACK</a>
+                        </td>
+                        <td>
+                            <a href="<?= base_url('index.php/Adm_ctrl/pdf_generate/') . $view_table['no_daftar'] ?>" class="fas fa-file-pdf" style='font-size:18px;color:#00aec9'>GENERATE PDF</a>
+                        </td>
+                    </tr>
+                </table>
+            <?php
                         }
-                ?>
+            ?>
             </form>
-            <tr align="CENTER">
-                <td>
-                    <a href="<?= base_url('index.php/Adm_ctrl/PPDB') ?>" class="desain_tombol">BACK</a>
-                </td>
-            </tr>
-            </table>
 
 
 

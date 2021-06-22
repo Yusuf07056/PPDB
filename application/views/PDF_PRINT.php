@@ -39,7 +39,6 @@ $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
 // set default header data
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 'BUKTI PENDAFTARAN PPDB SMA IPIEMS', PDF_HEADER_STRING);
-
 // set header and footer fonts
 $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
 $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
@@ -48,7 +47,7 @@ $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 // set margins
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, 20);
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -87,8 +86,7 @@ $title = <<< EOD
 EOD;
 
 $pdf->writeHTMLCell(0, 0, '', '', $title, 0, 1, 0, true, 'C', true);
-$table = '<table widht="100%">
-            ';
+$table = '<table widht="100%">';
 $table .= '
             <tr>
                         <th></th>
@@ -226,9 +224,13 @@ foreach ($view_bukti as $view_table) {
                 </tr>
                 </tr>';
 }
-$table .= '</table>
-        </div>';
+$table .= '</table>';
 $pdf->writeHTML($table, true, false, true, false, '');
+$title2 = <<< EOD
+<h3>CETAK FORMULIR PDF DAN BAWA BUKTI TRANSFER SAAT DAFTAR ULANG</h3>
+EOD;
+
+$pdf->writeHTMLCell(0, 0, '', '', $title2, 0, 1, 0, true, 'C', true);
 
 // set some text for example
 

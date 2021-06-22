@@ -238,8 +238,15 @@
                     </table>
                 </div>
             </form>
-        </div>
-
+            <div class="box">
+                <table>
+                    <tr>
+                        <th>
+                            <a href="<?= base_url('index.php/Welcome/generate_pdf_page') ?>">SUDAH ISI FORMULIR?,CETAK PDF DI SINI</a>
+                        </th>
+                    </tr>
+                </table>
+            </div>
     </section>
 
     <script language="javascript" src=" <?= base_url('asset/js/design.js') ?>"></script>
