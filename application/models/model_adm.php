@@ -161,7 +161,8 @@ class model_adm extends CI_Model
     }
     public function search_formulir($search)
     {
-        $query = $this->db->get_where('formulir', ['nama_lengkap' => $search]);
+        $query = $this->db->select('*')->from('formulir')->like('nama_lengkap', $search);
+        // $query = $this->db->get_where('formulir', ['nama_lengkap' => $search]);
         return $query;
     }
     public function data_admin($cari)

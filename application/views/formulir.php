@@ -44,7 +44,7 @@
                     <table class="table">
                         <tr>
                             <td>
-                                <input type="hidden" name="id_formulir" class="inputstyle" value="<?= sprintf($no_daftar) ?>">
+                                <input type="text" name="id_formulir" class="inputstyle" value="<?= $nodaftar ?>">
                             </td>
                         </tr>
                         <tr>
@@ -162,7 +162,19 @@
                                 <input type="file" name="gambar" id="gambar">
                             </td>
                         </tr>
-
+                        <tr>
+                            <td>Nomer WA</td>
+                            <td>
+                                <?php $view_bukti = $validasi_bukti->result_array();
+                                foreach ($view_bukti as $view_table) {
+                                ?>
+                                    <input type="text" name="no_wa" id="no_wa" value="<?= $view_table['no_hp_val'] ?>" class="inputstyle" disabled>
+                                    <input type="hidden" name="no_wa" id="no_wa" value="<?= $view_table['no_hp_val'] ?>" class="inputstyle">
+                                <?php
+                                }
+                                ?>
+                            </td>
+                        </tr>
                     </table>
 
                 </div>

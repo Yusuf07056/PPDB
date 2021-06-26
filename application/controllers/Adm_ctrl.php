@@ -1,12 +1,12 @@
 <?php
-
+defined('BASEPATH') or exit('No direct script access allowed');
 class Adm_ctrl extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
         $this->load->model('model_adm');
-        $this->load->library('pdf_report');
+        $this->load->library('Pdf_report');
     }
 
     public function index()
@@ -161,6 +161,7 @@ class Adm_ctrl extends CI_Controller
 
     public function PPDB()
     {
+        $data['id'] = 'Utama';
         $data['registrasi'] = $this->db->get_where('registrasi', ['email' => $this->session->userdata('email')])->row_array();
         $data['registrasi'] = $this->model_adm->get_registrasi();
         $email = $this->session->userdata('email');
@@ -179,34 +180,6 @@ class Adm_ctrl extends CI_Controller
         }
     }
 
-    public function PPDB_sort_cari()
-    {
-        $data['registrasi'] = $this->db->get_where('registrasi', ['email' => $this->session->userdata('email')])->row_array();
-        $data['registrasi'] = $this->model_adm->get_registrasi();
-        $email = $this->session->userdata('email');
-        $role = $this->session->userdata('role_id');
-        $data['bukti_pembayaran'] = $this->model_adm->get_bukti();
-        $data['validasi_bukti'] = $this->model_adm->get_val_bukti();
-        $data['formulir'] = $this->model_adm->get_formulir();
-        if (empty($email)) {
-            $this->session->sess_destroy();
-            redirect(base_url('index.php/Adm_ctrl'));
-        } elseif ($role != 1) {
-            redirect(base_url('index.php/Adm_ctrl'));
-        } else {
-            $status = $this->input->post('status');
-            $search = $this->input->post('SEARCH');
-            $data['validasi_bukti'] = $this->model_adm->get_valbuktistats($status);
-            $data['formulir'] = $this->model_adm->search_formulir($search);
-            $this->load->view('Pendaftaran', $data);
-        }
-    }
-
-    function cari_($search)
-    {
-        $data['formulir'] = $this->model_adm->search_formulir($search);
-        $this->load->view('Pendaftaran', $data);
-    }
 
     public function settanggal()
     {

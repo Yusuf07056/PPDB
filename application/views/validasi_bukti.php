@@ -19,7 +19,7 @@
 
             <div align="center" class="garisup">
                 <h1>LAMAN ADMIN
-                    <a href="<?= base_url('index.php/Adm_ctrl/adminnya') ?>">
+                    <a href="<?= base_url('index.php/Adm_ctrl/PPDB') ?>">
                         <button class="btn" id="tombol"><i class="fa fa-home"></i></button>
                     </a>
                     <button class="btn" id="tombolpopup" onclick="openNav()"><i class="fa fa-bars"></i></button>
@@ -33,7 +33,7 @@
             $view_bukti = $registrasi->result_array();
             foreach ($view_bukti as $view_table) {
             ?>
-                <a href="<?= base_url('index.php/Adm_ctrl/profil/') . $view_table['nama'] ?>">
+                <a>
                     <i class='fas fa-user-tie' style='font-size:36px; color: white;'></i>
 
                     <?= $view_table['nama'] ?>
@@ -44,7 +44,7 @@
                 <a href="<?= base_url('index.php/Adm_ctrl/PPDB') ?>">PENDAFTAR</a>
                 <a href="<?= base_url('index.php/Adm_ctrl/register') ?>">TAMBAH ADMIN</a>
                 <a href="<?= base_url('index.php/Adm_ctrl/logout') ?>">
-                    <i class="fas fa-sign-out-alt"></i>LOGOUT
+                    <i class="fa fa-sign-out" style='font-size:36px; color: white;'></i>LOGOUT
                 </a>
         </div>
 
@@ -79,7 +79,7 @@
                             <p>STATUS</p>
                         </td>
                         <td>
-                            <select name="status" id="status" class="desain_CB">
+                            <select name="status" id="status">
                                 <option value="TERIMA">TERIMA</option>
                                 <option value="TOLAK">TOLAK</option>
                             </select>
@@ -90,7 +90,8 @@
                             <p>NOMER HP</p>
                         </td>
                         <td>
-                            <input type="text" value="<?= $view_table['no_wa'] ?>" name="no_wa" id="myBtn">
+                            <input type="hidden" value="<?= $view_table['no_wa'] ?>" name="no_wa" id="myBtn">
+                            <input type="text" value="<?= $view_table['no_wa'] ?>" name="no_wa" id="myBtn" disabled>
                         </td>
                     </tr>
                     <tr>

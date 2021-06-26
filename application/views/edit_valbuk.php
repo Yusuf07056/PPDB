@@ -19,7 +19,7 @@
 
             <div align="center" class="garisup">
                 <h1>LAMAN ADMIN
-                    <a href="<?= base_url('index.php/Adm_ctrl/adminnya') ?>">
+                    <a href="<?= base_url('index.php/Adm_ctrl/PPDB') ?>">
                         <button class="btn" id="tombol"><i class="fa fa-home"></i></button>
                     </a>
                     <button class="btn" id="tombolpopup" onclick="openNav()"><i class="fa fa-bars"></i></button>
@@ -66,9 +66,9 @@
                             <p>STATUS</p>
                         </td>
                         <td>
-                            <select name="status" id="status" class="desain_CB">
+                            <select name="status" id="status">
                                 <option value="TERIMA">TERIMA</option>
-                                <option value="REVISI">REVISI</option>
+                                <option value="TOLAK">TOLAK</option>
                             </select>
                         </td>
                     </tr>

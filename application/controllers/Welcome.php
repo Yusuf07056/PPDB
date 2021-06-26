@@ -85,26 +85,22 @@ class Welcome extends CI_Controller
 	public function formulir()
 	{
 		$data['validasi_bukti'] = $this->db->get_where('validasi_bukti', ['no_hp_val' => $this->session->userdata('no_hp_val')])->row_array();
-
 		$no_wa = $this->session->userdata('no_hp_val');
-
 		if (empty($no_wa)) {
 			$this->session->sess_destroy();
 			redirect(base_url('index.php/Welcome/phone_verification'));
 		} else {
-			$dariDB = $this->model_PPDB->cek_no_daftar();
-			$nourut = $dariDB;
-			$no_daftarSekarang = $nourut + 1;
-			$data = array('no_daftar' => $no_daftarSekarang);
+			$phone_number = $this->input->post('no_wa');
+			$data['validasi_bukti'] = $this->model_PPDB->nomervalidasi($phone_number);
+			$data['nodaftar'] = $this->model_PPDB->cek_no_daftar();
+
 			$this->load->view('formulir', $data);
 		}
 	}
 	public function generate_pdf_page()
 	{
 		$data['validasi_bukti'] = $this->db->get_where('validasi_bukti', ['no_hp_val' => $this->session->userdata('no_hp_val')])->row_array();
-
 		$no_wa = $this->session->userdata('no_hp_val');
-
 		if (empty($no_wa)) {
 			$this->session->sess_destroy();
 			redirect(base_url('index.php/Welcome/phone_verification'));
@@ -126,16 +122,17 @@ class Welcome extends CI_Controller
 		$this->form_validation->set_rules('namalengkap', 'Nama lengkap', 'required');
 		$this->form_validation->set_rules('jk', 'Gender', 'required');
 		$this->form_validation->set_rules('kotakelahiran', 'Kota kelahiran', 'required');
-		$this->form_validation->set_rules('tglkelahiran', 'Tgl kelahiran', 'required');
+		$this->form_validation->set_rules('tglkelahiran', 'Tgl kelahiran');
 		$this->form_validation->set_rules('agama', 'Agama', 'required');
 		$this->form_validation->set_rules('anakke', 'Anak ke', 'required');
 		$this->form_validation->set_rules('saudara', 'Saudara', 'required');
 		$this->form_validation->set_rules('alamat', 'Alamat', 'required');
 		$this->form_validation->set_rules('rt', 'Rt', 'required');
 		$this->form_validation->set_rules('rw', 'Rw', 'required');
+		$this->form_validation->set_rules('no_wa', 'NOMER WA', 'required|is_unique[formulir.no_wa]', ['is_unique' => 'NOMER SUDAH DIPAKAI']);
 		$this->form_validation->set_rules('kelurahan', 'Kelurahan', 'required');
 		$this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required');
-		$this->form_validation->set_rules('kabupaten', 'Kabupaten/kota', 'required');
+		$this->form_validation->set_rules('kabupaten', 'Kabupaten/kota');
 		$this->form_validation->set_rules('Provinsi', 'Provinsi', 'required');
 		$this->form_validation->set_rules('kodepos', 'Kode pos', 'required');
 		$this->form_validation->set_rules('nisn', 'Nisn', 'required');
@@ -155,66 +152,72 @@ class Welcome extends CI_Controller
 
 		if (!$this->upload->do_upload('gambar') || $this->form_validation->run() == false) {
 			$this->load->view('formulir');
-		} else {
-			try {
-				$no_daftar = $this->input->post('id_formulir');
-				$namalengkap = $this->input->post('namalengkap');
-				$jk = $this->input->post('jk');
-				$kotakelahiran = $this->input->post('kotakelahiran');
-				$tglkelahiran = $this->input->post('tglkelahiran');
-				$agama = $this->input->post('agama');
-				$anakke = $this->input->post('anakke');
-				$saudara = $this->input->post('saudara');
-				$alamat = $this->input->post('alamat');
-				$rt = $this->input->post('rt');
-				$rw = $this->input->post('rw');
-				$kelurahan = $this->input->post('kelurahan');
-				$kecamatan = $this->input->post('kecamatan');
-				$kabupaten = $this->input->post('kabupaten');
-				$Provinsi = $this->input->post('Provinsi');
-				$kodepos = $this->input->post('kodepos');
-				$nisn = $this->input->post('nisn');
-				$asal = $this->input->post('asal');
-				$alamatasal = $this->input->post('alamatasal');
-				$namawali = $this->input->post('namawali');
-				$alamatwali = $this->input->post('alamatwali');
-				$no_kk = $this->input->post('no_kk');
-				$pendapatan = $this->input->post('pendapatan');
-				$telportu = $this->input->post('telportu');
-				$foto = $this->upload->data('file_name');
-				$data = [
-					'no_daftar' => $no_daftar,
-					'nama_lengkap' => $namalengkap,
-					'gender' => $jk,
-					'kota_kelahiran' => $kotakelahiran,
-					'tgl_lahir' => $tglkelahiran,
-					'agama' => $agama,
-					'anak_ke' => $anakke,
-					'saudara' => $saudara,
-					'alamat' => $alamat,
-					'rt' => $rt,
-					'rw' => $rw,
-					'kelurahan' => $kelurahan,
-					'kecamatan' => $kecamatan,
-					'kota_kab' => $kabupaten,
-					'provinsi' => $Provinsi,
-					'kode_pos' => $kodepos,
-					'nisn' => $nisn,
-					'asal_sekolah' => $asal,
-					'alamat_asal_sekolah' => $alamatasal
+		} elseif ($this->form_validation->run() == true) {
+			$no_daftar = $this->input->post('id_formulir');
+			$namalengkap = $this->input->post('namalengkap');
+			$jk = $this->input->post('jk');
+			$kotakelahiran = $this->input->post('kotakelahiran');
+			$tglkelahiran = $this->input->post('tglkelahiran');
+			$agama = $this->input->post('agama');
+			$anakke = $this->input->post('anakke');
+			$saudara = $this->input->post('saudara');
+			$alamat = $this->input->post('alamat');
+			$rt = $this->input->post('rt');
+			$rw = $this->input->post('rw');
+			$kelurahan = $this->input->post('kelurahan');
+			$kecamatan = $this->input->post('kecamatan');
+			$kabupaten = $this->input->post('kabupaten');
+			$Provinsi = $this->input->post('Provinsi');
+			$kodepos = $this->input->post('kodepos');
+			$nisn = $this->input->post('nisn');
+			$no_wa = $this->input->post('no_wa');
+			$asal = $this->input->post('asal');
+			$alamatasal = $this->input->post('alamatasal');
+			$namawali = $this->input->post('namawali');
+			$alamatwali = $this->input->post('alamatwali');
+			$no_kk = $this->input->post('no_kk');
+			$pendapatan = $this->input->post('pendapatan');
+			$telportu = $this->input->post('telportu');
+			$foto = $this->upload->data('file_name');
+			$data = [
+				'no_daftar' => $no_daftar,
+				'nama_lengkap' => $namalengkap,
+				'gender' => $jk,
+				'kota_kelahiran' => $kotakelahiran,
+				'tgl_lahir' => $tglkelahiran,
+				'agama' => $agama,
+				'anak_ke' => $anakke,
+				'saudara' => $saudara,
+				'alamat' => $alamat,
+				'rt' => $rt,
+				'rw' => $rw,
+				'kelurahan' => $kelurahan,
+				'kecamatan' => $kecamatan,
+				'kota_kab' => $kabupaten,
+				'provinsi' => $Provinsi,
+				'kode_pos' => $kodepos,
+				'nisn' => $nisn,
+				'asal_sekolah' => $asal,
+				'alamat_asal_sekolah' => $alamatasal
 
-				];
-				$data['foto'] = $foto;
-				$data['nama_orangtua'] = $namawali;
-				$data['alamat_orangtua'] = $alamatwali;
-				$data['no_kk'] = $no_kk;
-				$data['pendapatan'] = $pendapatan;
-				$data['no_hp_ortu'] = $telportu;
-				$this->db->insert('formulir', $data);
-				redirect(base_url('index.php/Welcome/generate_pdf_page'));
-			} catch (Exception $ex) {
-				redirect(base_url('idnex.php/welcome/formulir'));
-			}
+			];
+			$data['foto'] = $foto;
+			$data['no_wa'] = $no_wa;
+			$data['nama_orangtua'] = $namawali;
+			$data['alamat_orangtua'] = $alamatwali;
+			$data['no_kk'] = $no_kk;
+			$data['pendapatan'] = $pendapatan;
+			$data['no_hp_ortu'] = $telportu;
+			$this->db->insert('formulir', $data);
+			redirect(base_url('index.php/Welcome/generate_pdf_page'));
+		} else {
+			$this->session->set_flashdata(
+				'message',
+				'<div class="alert alert-danger" role="alert">
+                            PASSWORD SALAH! 
+                        </div>'
+			);
+			redirect(base_url('index.php/Adm_ctrl'));
 		}
 	}
 	function pdf_generate()
@@ -253,7 +256,7 @@ class Welcome extends CI_Controller
 					if ($validasi_nomer['no_hp_val'] == $phone_number) {
 						if ($validasi_nomer['stts'] == $stts) {
 							# code...
-							redirect(base_url('index.php/Welcome/formulir'));
+							$this->formulir();
 						} else {
 							# code...
 							redirect(base_url('index.php/Welcome/phone_verification'));

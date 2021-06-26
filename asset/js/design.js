@@ -1,9 +1,11 @@
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
+  ocument.getElementById("main").style.marginLeft = "250px";
 }
 
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
+  ocument.getElementById("main").style.marginLeft = "0px";
 }
 //slideshow js
 var slideIndex = 0;
@@ -45,8 +47,35 @@ function showSlides(n) {
   slides[slideIndex - 1].style.display = "block";
   setTimeout(showSlides, 2000); // ganti slide setiap 2 detik
 }*/
-function search() {
-  document.getElementById("content").innerHTML = '<object type="type/html" data="XBOX.html" ></object>';
+function cari_data_bukti() {
+  $(document).ready(function () {
+    $("#myInput").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#myTableBukti tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+}
+function cari_data_formulir() {
+  $(document).ready(function () {
+    $("#mySearch").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#myTableFormulir tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+}
+function cari_data_filter() {
+  $(document).ready(function () {
+    $("#myFilter").on("click", function () {
+      var value = $(this).val().toLowerCase();
+      $("#myTableStatus tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
 }
 // Get the element with id="defaultOpen" and click on it'
 function main_tab(cityName) {

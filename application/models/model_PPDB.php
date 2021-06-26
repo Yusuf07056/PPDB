@@ -13,9 +13,15 @@ class model_PPDB extends CI_Model
 
     public function cek_no_daftar()
     {
-        $query = $this->db->query("SELECT MAX(no_daftar) as no_daftar from formulir");
-        $hasil = $query->row();
-        return $hasil->no_daftar;
+        $cd = $this->db->query("SELECT MAX(no_daftar) as no_daftar from formulir");
+        $kd = "";
+        if ($cd->num_rows() > 0) {
+            foreach ($cd->result() as $k) {
+                $tmp = ((int)$k->no_daftar) + 1;
+                $kd = sprintf($tmp);
+            }
+        }
+        return $kd;
     }
 
     public function cek_no_bio()
@@ -49,5 +55,10 @@ class model_PPDB extends CI_Model
         $this->db->where('no_daftar', $no_daftar);
         $data = $this->db->get('');
         return $data;
+    }
+    public function nomervalidasi($no_wa)
+    {
+        $query = $this->db->get_where('validasi_bukti', ['no_hp_val' => $no_wa]);
+        return $query;
     }
 }

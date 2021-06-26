@@ -6,9 +6,16 @@
     z-index: 1;
 }
 a{
-  color: white;
+  color: black;
   text-decoration: solid;
   font-family: Arial, Helvetica, sans-serif;
+}
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
 }
 .kotakupp{
 
@@ -150,6 +157,7 @@ body,html{
 .dropdown {
     position: relative;
     display: inline-block;
+    background: #00aec9;
   }
   
   .dropdown-content {
@@ -166,6 +174,15 @@ body,html{
     text-decoration: none;
     display: block;
   }
+  .dropbtn {
+  background-color: #00aec9;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
   
 .dropdown-content a:hover {
     background-color: #018296; 
@@ -195,6 +212,9 @@ body,html{
     margin-left: 50px;
     cursor: pointer;
 }
+#main {
+  transition: margin-left .5s;
+} 
 
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
@@ -461,3 +481,4 @@ th, td {
 }
 
 tr:hover {background-color:#d4d3d3;}
+/* search */
