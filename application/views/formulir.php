@@ -44,7 +44,7 @@
                     <table class="table">
                         <tr>
                             <td>
-                                <input type="text" name="id_formulir" class="inputstyle" value="<?= $nodaftar ?>">
+                                <input type="hidden" name="id_formulir" class="inputstyle" value="<?= $nodaftar ?>">
                             </td>
                         </tr>
                         <tr>
@@ -168,7 +168,7 @@
                                 <?php $view_bukti = $validasi_bukti->result_array();
                                 foreach ($view_bukti as $view_table) {
                                 ?>
-                                    <input type="text" name="no_wa" id="no_wa" value="<?= $view_table['no_hp_val'] ?>" class="inputstyle" disabled>
+                                    <input type="text" value="<?= $view_table['no_hp_val'] ?>" class="inputstyle" disabled>
                                     <input type="hidden" name="no_wa" id="no_wa" value="<?= $view_table['no_hp_val'] ?>" class="inputstyle">
                                 <?php
                                 }
@@ -198,7 +198,7 @@
                         <tr>
                             <td>Nomer KK</td>
                             <td>
-                                <input type="number" name="no_kk" class="inputstyle" placeholder="nomer KK">
+                                <input type="text" name="no_kk" class="inputstyle" placeholder="nomer KK">
                             </td>
                         </tr>
 
@@ -211,7 +211,7 @@
 
                         <td>Telp Orang Tua</td>
                         <td>
-                            <input type="number" name="telportu" class="inputstyle" placeholder="telp orang tua">
+                            <input type="text" name=" telportu" class="inputstyle" placeholder="telp orang tua">
                         </td>
                         </tr>
                     </table>
