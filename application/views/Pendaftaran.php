@@ -15,9 +15,9 @@
 <body class="bgnya">
     <div id="main">
         <div class="kotakup">
-            <div align=" center" class="kotakup kotakupp">
+            <div align="center" class="kotakup kotakupp">
 
-                <img src="<?= base_url('asset/images/LOGO.png') ?>" width="5%" align="center">
+                <img src="<?= base_url('asset/images/LOGO.png') ?>" width="5%">
 
                 <div align="center" class="garisup">
                     <h1>LAMAN ADMIN
