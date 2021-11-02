@@ -178,7 +178,7 @@ class Welcome extends CI_Controller
 			$no_kk = $this->input->post('no_kk');
 			$pendapatan = $this->input->post('pendapatan');
 			$telportu = $this->input->post('telportu');
-			$foto = $this->upload->data('file_name');
+			$foto = $this->upload->data('gambar');
 			$data = [
 				'no_daftar' => $no_daftar,
 				'nama_lengkap' => $namalengkap,
