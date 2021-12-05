@@ -28,7 +28,7 @@
         <div id="mySidenav" class="sidenav">
             <button class="closebtn" onclick="closeNav()">&times;</button>
             <?php
-            $view_bukti = $registrasi->result_array();
+			$view_bukti = $registrasi->result_array();
             foreach ($view_bukti as $view_table) {
             ?>
                 <a href="<?= base_url('index.php/Adm_ctrl/profil/') . $view_table['nama'] ?>">

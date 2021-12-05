@@ -59,8 +59,8 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 // set some language-dependent strings (optional)
 if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
-    require_once(dirname(__FILE__) . '/lang/eng.php');
-    $pdf->setLanguageArray($l);
+	require_once(dirname(__FILE__) . '/lang/eng.php');
+	$pdf->setLanguageArray($l);
 }
 
 // ---------------------------------------------------------
@@ -86,6 +86,7 @@ $title = <<< EOD
 EOD;
 
 $pdf->writeHTMLCell(0, 0, '', '', $title, 0, 1, 0, true, 'C', true);
+
 $table = '<table widht="100%">';
 $table .= '
             <tr>
@@ -100,14 +101,14 @@ $table .= '
 $table .= '<tr>';
 $view_bukti = $formulir->result_array();
 foreach ($view_bukti as $view_table) {
-    $table .= '<tr>
-                    <td >ID FORMULIR</td>
-                    <td >:</td>
-                    <td >' . $view_table['no_daftar'] . '</td>
-                    <td rowspan="6" ><img src="' . base_url() . 'asset/images/' . $view_table['foto'] . '" style="border-radius: 4px;padding: 5px;width: 180px; height :200px;"></td>
+	$table .= '<tr>
+                    <td>ID FORMULIR</td>
+                    <td>:</td>
+                    <td>' . $view_table['no_daftar'] . '</td>
+                    <td><img src="' . base_url() . 'asset/images/' . $view_table['foto'] . '" style="border-radius: 4px;padding: 5px;width: 180px; height :200px;"></td>
                 
                 </tr>
-                <tr>
+				<tr>
                     <td widht="15%">NAMA LENGKAP</td>
                     <td widht="1%">:</td>
                     <td widht="60%">' . $view_table['nama_lengkap'] . '</td>

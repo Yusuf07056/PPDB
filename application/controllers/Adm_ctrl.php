@@ -177,7 +177,9 @@ class Adm_ctrl extends CI_Controller
 		} elseif ($role != 1) {
 			redirect(base_url('index.php/User'));
 		} else {
+			$this->load->view('templates/header_admin');
 			$this->load->view('Pendaftaran', $data);
+			$this->load->view('templates/footer_admin');
 		}
 	}
 

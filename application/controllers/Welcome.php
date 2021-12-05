@@ -92,7 +92,7 @@ class Welcome extends CI_Controller
 		} else {
 			$phone_number = $this->input->post('no_wa');
 			$data['validasi_bukti'] = $this->model_PPDB->nomervalidasi($phone_number);
-			$data['nodaftar'] = $this->model_PPDB->cek_no_daftar();
+			$data['no_daftar'] = $this->model_PPDB->cek_no_daftar();
 
 			$this->load->view('formulir', $data);
 		}
@@ -108,10 +108,10 @@ class Welcome extends CI_Controller
 			$this->load->view('generate_pdf_page');
 		}
 	}
-	public function generating_pdf()
+	public function generating_pdf($no_hp_val)
 	{
-		$namalengkap = $this->input->post('namalengkap');
-		$data['formulir'] = $this->model_PPDB->get_form_select_nama($namalengkap);
+		//$namalengkap = $this->input->post('namalengkap');
+		$data['formulir'] = $this->model_PPDB->get_form_select_phone($no_hp_val);
 		$this->load->view('PDF_PRINT', $data);
 	}
 
@@ -178,7 +178,7 @@ class Welcome extends CI_Controller
 			$no_kk = $this->input->post('no_kk');
 			$pendapatan = $this->input->post('pendapatan');
 			$telportu = $this->input->post('telportu');
-			$foto = $this->upload->data('gambar');
+			$foto = $this->upload->data('file_name');
 			$data = [
 				'no_daftar' => $no_daftar,
 				'nama_lengkap' => $namalengkap,
@@ -209,6 +209,10 @@ class Welcome extends CI_Controller
 			$data['pendapatan'] = $pendapatan;
 			$data['no_hp_ortu'] = $telportu;
 			$this->db->insert('formulir', $data);
+
+			$data['formulir'] = $this->model_PPDB->get_form_select_phone($no_wa);
+			$this->load->view('PDF_PRINT', $data);
+
 			redirect(base_url('index.php/Welcome/generate_pdf_page'));
 		} else {
 			$this->session->set_flashdata(
