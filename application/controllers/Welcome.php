@@ -84,8 +84,8 @@ class Welcome extends CI_Controller
 	#auto increment
 	public function formulir()
 	{
-		$data['validasi_bukti'] = $this->db->get_where('validasi_bukti', ['no_hp_val' => $this->session->userdata('no_hp_val')])->row_array();
 		$no_wa = $this->session->userdata('no_hp_val');
+		$data['validasi_bukti'] = $this->db->get_where('validasi_bukti', ['no_hp_val' => $no_wa])->row_array();
 		if (empty($no_wa)) {
 			$this->session->sess_destroy();
 			redirect(base_url('index.php/Welcome/phone_verification'));
@@ -129,7 +129,7 @@ class Welcome extends CI_Controller
 		$this->form_validation->set_rules('alamat', 'Alamat', 'required');
 		$this->form_validation->set_rules('rt', 'Rt', 'required');
 		$this->form_validation->set_rules('rw', 'Rw', 'required');
-		$this->form_validation->set_rules('no_wa', 'NOMER WA', 'required|is_unique[formulir.no_wa]', ['is_unique' => 'NOMER SUDAH DIPAKAI']);
+		$this->form_validation->set_rules('val_id', 'ID validasi', 'required|is_unique[formulir.validasi_id]', ['is_unique' => 'ID SUDAH TERDAFTAR']);
 		$this->form_validation->set_rules('kelurahan', 'Kelurahan', 'required');
 		$this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required');
 		$this->form_validation->set_rules('kabupaten', 'Kabupaten/kota');
@@ -170,7 +170,7 @@ class Welcome extends CI_Controller
 			$Provinsi = $this->input->post('Provinsi');
 			$kodepos = $this->input->post('kodepos');
 			$nisn = $this->input->post('nisn');
-			$no_wa = $this->input->post('no_wa');
+			$id_valid = $this->input->post('val_id');
 			$asal = $this->input->post('asal');
 			$alamatasal = $this->input->post('alamatasal');
 			$namawali = $this->input->post('namawali');
@@ -179,39 +179,66 @@ class Welcome extends CI_Controller
 			$pendapatan = $this->input->post('pendapatan');
 			$telportu = $this->input->post('telportu');
 			$foto = $this->upload->data('file_name');
-			$data = [
-				'no_daftar' => $no_daftar,
-				'nama_lengkap' => $namalengkap,
-				'gender' => $jk,
-				'kota_kelahiran' => $kotakelahiran,
-				'tgl_lahir' => $tglkelahiran,
-				'agama' => $agama,
-				'anak_ke' => $anakke,
-				'saudara' => $saudara,
-				'alamat' => $alamat,
-				'rt' => $rt,
-				'rw' => $rw,
-				'kelurahan' => $kelurahan,
-				'kecamatan' => $kecamatan,
-				'kota_kab' => $kabupaten,
-				'provinsi' => $Provinsi,
-				'kode_pos' => $kodepos,
-				'nisn' => $nisn,
-				'asal_sekolah' => $asal,
-				'alamat_asal_sekolah' => $alamatasal
+			// $data = [
+			// 	'no_daftar' => $no_daftar,
+			// 	'nama_lengkap' => $namalengkap,
+			// 	'gender' => $jk,
+			// 	'kota_kelahiran' => $kotakelahiran,
+			// 	'tgl_lahir' => $tglkelahiran,
+			// 	'agama' => $agama,
+			// 	'anak_ke' => $anakke,
+			// 	'saudara' => $saudara,
+			// 	'alamat' => $alamat,
+			// 	'rt' => $rt,
+			// 	'rw' => $rw,
+			// 	'kelurahan' => $kelurahan,
+			// 	'kecamatan' => $kecamatan,
+			// 	'kota_kab' => $kabupaten,
+			// 	'provinsi' => $Provinsi,
+			// 	'kode_pos' => $kodepos,
+			// 	'nisn' => $nisn,
+			// 	'asal_sekolah' => $asal,
+			// 	'alamat_asal_sekolah' => $alamatasal
 
-			];
-			$data['foto'] = $foto;
-			$data['no_wa'] = $no_wa;
-			$data['nama_orangtua'] = $namawali;
-			$data['alamat_orangtua'] = $alamatwali;
-			$data['no_kk'] = $no_kk;
-			$data['pendapatan'] = $pendapatan;
-			$data['no_hp_ortu'] = $telportu;
-			$this->db->insert('formulir', $data);
-
-			$data['formulir'] = $this->model_PPDB->get_form_select_phone($no_wa);
-			$this->load->view('PDF_PRINT', $data);
+			// ];
+			// $data['foto'] = $foto;
+			// $data['validasi_id'] = $id_valid;
+			// $data['nama_orangtua'] = $namawali;
+			// $data['alamat_orangtua'] = $alamatwali;
+			// $data['no_kk'] = $no_kk;
+			// $data['pendapatan'] = $pendapatan;
+			// $data['no_hp_ortu'] = $telportu;
+			// $this->db->insert('formulir', $data);
+			$this->model_PPDB->input_formulir(
+				$no_daftar,
+				$namalengkap,
+				$jk,
+				$kotakelahiran,
+				$tglkelahiran,
+				$agama,
+				$anakke,
+				$saudara,
+				$alamat,
+				$rt,
+				$rw,
+				$kelurahan,
+				$kecamatan,
+				$kabupaten,
+				$Provinsi,
+				$kodepos,
+				$nisn,
+				$asal,
+				$alamatasal,
+				$foto,
+				$id_valid,
+				$namawali,
+				$alamatwali,
+				$no_kk,
+				$pendapatan,
+				$telportu
+			);
+			// $data['formulir'] = $this->model_PPDB->get_form_select_phone($no_wa);
+			// $this->load->view('PDF_PRINT', $data);
 
 			redirect(base_url('index.php/Welcome/generate_pdf_page'));
 		} else {
@@ -246,6 +273,7 @@ class Welcome extends CI_Controller
 		$phone_number = $this->input->post('no_wa');
 
 		$validasi_nomer = $this->db->get_where('validasi_bukti', ['no_hp_val' => $phone_number])->row_array();
+		// $validasi_nomer['join_phone_verification'] = $this->model_PPDB->JT_validasi_search($phone_number);
 		if ($this->form_validation->run() == false) {
 			$this->load->view('phone_verification');
 		} else {

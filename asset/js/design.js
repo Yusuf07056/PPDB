@@ -104,9 +104,45 @@ var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 
 function openpopup(evt) {
-  document.getElementById("myModal").btn;
+	document.getElementById("myModal").btn;
 	btn.onclick = modal.style.display = "block";
 }
 function closepopup() {
 	span.onclick = modal.style.display = "none";
 }
+// function cari_data_formulir() {
+// 	var input, filter, table, tr, td, i, txtValue;
+// 	input = document.getElementById("mySearch");
+// 	filter = input.value.toUpperCase();
+// 	table = document.getElementById("myTableBukti");
+// 	tr = table.getElementsByTagName("tr");
+// 	for (i = 0; i < tr.length; i++) {
+// 		td = tr[i].getElementsByTagName("td")[0];
+// 		if (td) {
+// 			txtValue = td.textContent || td.innerText;
+// 			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+// 				tr[i].style.display = "";
+// 			} else {
+// 				tr[i].style.display = "none";
+// 			}
+// 		}
+// 	}
+// }
+// function cari_data_filter() {
+// 	var input, filter, tbody, tr, td, i, txtValue;
+// 	input = document.getElementById("myFilter");
+// 	filter = input.value.toUpperCase();
+// 	tbody = document.getElementById("myTableStatus");
+// 	tr = table.getElementsByTagName("tr");
+// 	for (i = 0; i < tr.length; i++) {
+// 		td = tr[i].getElementsByTagName("td")[0];
+// 		if (td) {
+// 			txtValue = td.textContent || td.innerText;
+// 			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+// 				tr[i].style.display = "";
+// 			} else {
+// 				tr[i].style.display = "none";
+// 			}
+// 		}
+// 	}
+// }

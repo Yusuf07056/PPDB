@@ -42,11 +42,7 @@
 				<div id="London" class="tabcontent">
 
 					<table class="table">
-						<tr>
-							<td>
-								<input type="hidden" name="id_formulir" class="inputstyle" value="<?= $no_daftar ?>">
-							</td>
-						</tr>
+						<input type="hidden" name="id_formulir" class="inputstyle" value="<?= $no_daftar ?>">
 						<tr>
 							<td>Nama Lengkap</td>
 							<td>
@@ -163,17 +159,14 @@
 							</td>
 						</tr>
 						<tr>
-							<td>Nomer WA</td>
-							<td>
-								<?php $view_bukti = $validasi_bukti->result_array();
-								foreach ($view_bukti as $view_table) {
-								?>
-									<input type="text" value="<?= $view_table['no_hp_val'] ?>" class="inputstyle" disabled>
-									<input type="hidden" name="no_wa" id="no_wa" value="<?= $view_table['no_hp_val'] ?>" class="inputstyle">
-								<?php
-								}
-								?>
-							</td>
+							<?php $view_bukti = $validasi_bukti->result_array();
+							foreach ($view_bukti as $view_table) {
+							?>
+								<input type="text" value="<?= $view_table['id_valbuk'] ?>" class="inputstyle" hidden>
+								<input type="hidden" name="val_id" id="val_id" value="<?= $view_table['id_valbuk'] ?>" class="inputstyle">
+							<?php
+							}
+							?>
 						</tr>
 					</table>
 

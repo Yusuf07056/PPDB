@@ -115,7 +115,7 @@
 					<tr>
 						<td>
 							<select name="status" id="myFilter" placeholder="FILTER" onclick="cari_data_filter()">
-								<option value=" TERIMA">TERIMA</option>
+								<option value="TERIMA">TERIMA</option>
 								<option value="TOLAK">TOLAK</option>
 							</select>
 						</td>
@@ -127,7 +127,7 @@
 
 					</tr>
 				</table>
-				<table align="CENTER">
+				<!-- <table align="CENTER">
 					<thead>
 						<tr align="CENTER">
 							<th>ID validasi</th>
@@ -151,6 +151,29 @@
 							</tr>
 						<?php
 						}
+						?>
+					</tbody>
+				</table> -->
+				<table align="CENTER">
+					<thead>
+						<tr align="CENTER">
+							<th>ID validasi</th>
+							<th>atas_nama</th>
+							<th>NOMER HP</th>
+							<th>STATUS</th>
+						</tr>
+					</thead>
+					<tbody id="myTableStatus">
+						<?php foreach ($join_table_validasi as $validasi) :
+						?>
+							<tr align="CENTER">
+								<td><?= $validasi['id_valbuk'] ?></td>
+								<td><?= $validasi['atas_nama'] ?></td>
+								<td><?= $validasi['no_wa'] ?></td>
+								<td><?= $validasi['stts'] ?></td>
+							</tr>
+						<?php
+						endforeach;
 						?>
 					</tbody>
 				</table>

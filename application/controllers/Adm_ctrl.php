@@ -170,6 +170,7 @@ class Adm_ctrl extends CI_Controller
 		$data['registrasi'] = $this->model_adm->data_admin($email);
 		$data['bukti_pembayaran'] = $this->model_adm->get_bukti();
 		$data['validasi_bukti'] = $this->model_adm->get_val_bukti();
+		$data['join_table_validasi'] = $this->model_adm->JT_validasi();
 		$data['formulir'] = $this->model_adm->get_formulir();
 		if (empty($email)) {
 			$this->session->sess_destroy();
